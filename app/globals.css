@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Raleway:wght@200;300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-dim: #8A6E2F;
+  --black: #060606;
+  --charcoal: #0E0E0E;
+  --surface: #131313;
+  --cream: #F2EDE4;
+  --cream-dim: rgba(242, 237, 228, 0.5);
+  --cream-ghost: rgba(242, 237, 228, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--black);
+  color: var(--cream);
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Utilities */
+.section-label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Buttons */
+.btn-gold-outline {
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--cream);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  height: 44px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  transition: all 300ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (hover: hover) {
+  .btn-gold-outline:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+}
+
+/* Preloader Animation */
+@keyframes drawLine {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes fadeUpOut {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-30px); opacity: 0; }
+}
+
+/* Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Clip path for mobile menu */
+.clip-circle-0 {
+  clip-path: circle(0% at right top);
+}
+.clip-circle-full {
+  clip-path: circle(150% at right top);
+}
+
+/* Film Grain Overlay */
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  z-index: 10;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* Parallax/Magnetic wrapper */
+.parallax-wrap {
+  perspective: 1000px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  /* Disable pointer events on specific hover elements for mobile if needed */
+  .no-hover-mobile {
+    pointer-events: none;
+  }
+}
+
+/* Fix all sections */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Fix all grids on mobile */
+@media (max-width: 768px) {
+  .services-grid { 
+    grid-template-columns: 1fr !important; 
+    gap: 16px;
+  }
+  
+  .films-grid { 
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px 20px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  /* Hero text */
+  .hero-h1 {
+    font-size: clamp(42px, 11vw, 64px) !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* Section headings */
+  h2 {
+    font-size: clamp(36px, 9vw, 52px) !important;
+  }
+  
+  /* All buttons full width on mobile */
+  .cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  
+  .cta-group button,
+  .cta-group a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  /* Service cards height */
+  .service-card {
+    height: 260px !important;
+  }
+  
+  /* Navbar height */
+  .navbar {
+    height: 64px !important;
+    padding: 0 24px !important;
+  }
+  
+  /* Disable all parallax */
+  [data-parallax], [data-magnetic] {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .navbar {
+    padding: 0 16px !important;
+  }
+}
+
+/* Marquee mobile fix */
+@media (max-width: 768px) {
+  .marquee-track {
+    animation-duration: 25s !important;
+  }
+  .marquee-text {
+    font-size: 10px !important;
+  }
+}
+
+/* Contact form mobile fix */
+@media (max-width: 768px) {
+  .contact-layout {
+    grid-template-columns: 1fr !important;
+    gap: 60px;
+  }
+  
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-size: 16px !important; /* prevents iOS zoom on focus */
+    height: 52px !important;
+  }
+  
+  .contact-form textarea {
+    height: 140px !important;
+  }
+}
+
+/* Hamburger button styles */
+.hamburger {
+  display: none; /* hidden desktop */
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 50%;
+  position: relative;
+  z-index: 10001;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hamburger:hover {
+  border-color: #C9A84C;
+  transform: scale(1.05);
+}
+
+.hamburger:active {
+  transform: scale(0.95);
+}
+
+/* Lines wrapper to keep them centered */
+.hamburger .ham-top,
+.hamburger .ham-dot,
+.hamburger .ham-bottom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #C9A84C;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity 0.3s ease,
+              width 0.4s ease;
+}
+
+/* Top line */
+.ham-top {
+  width: 18px;
+  height: 1px;
+  transform: translate(-50%, -6px); /* 6px above center */
+  transform-origin: center;
+}
+
+/* Center gold dot */
+.ham-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Bottom line */
+.ham-bottom {
+  width: 13px; /* Asymmetrical premium look */
+  height: 1px;
+  transform: translate(-50%, 5px); /* 5px below center */
+  transform-origin: center;
+}
+
+/* OPEN STATE */
+.hamburger.is-open .ham-top {
+  width: 18px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.hamburger.is-open .ham-dot {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.hamburger.is-open .ham-bottom {
+  width: 18px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+}
+
+
+/* Mobile Menu Overlay Styles */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #060606;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 40px 60px;
+  clip-path: circle(0% at calc(100% - 38px) 38px);
+  transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+
+.mobile-menu.is-open {
+  clip-path: circle(150% at calc(100% - 38px) 38px);
+  pointer-events: all;
+}
+
+/* WhatsApp Floating Button Styles */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #060606;
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 100px;
+  padding: 12px 20px 12px 14px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-float.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.whatsapp-float:active {
+  border-color: #C9A84C;
+  transform: scale(0.97);
+}
+
+/* Mobile: icon only, no text */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    padding: 14px;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 16px;
+  }
+  
+  .whatsapp-label {
+    display: none;
+  }
+}
+
