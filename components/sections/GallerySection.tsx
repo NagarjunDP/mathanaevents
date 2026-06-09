@@ -3,18 +3,25 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const photos = [
-  { src: "/gallery/photo-01.jpg", alt: "Candid bridal moment — bride laughing with joy" },
-  { src: "/gallery/photo-02.jpg", alt: "Wedding ceremony — couple at mandap with fire ritual" },
-  { src: "/gallery/photo-03.jpg", alt: "Pre-wedding shoot — couple in palace corridor at golden hour" },
-  { src: "/gallery/photo-04.jpg", alt: "Cocktail party — elegant wedding reception venue" },
-  { src: "/gallery/photo-05.jpg", alt: "Destination wedding — Kerala backwaters at sunset" },
-  { src: "/gallery/photo-06.jpg", alt: "Housewarming ceremony — grihapravesh ritual" },
-  { src: "/gallery/photo-07.jpg", alt: "Birthday celebration — sparklers and golden candlelight" },
-  { src: "/gallery/photo-08.jpg", alt: "Sunset silhouette — couple at golden hour" },
-  { src: "/gallery/photo-01.jpg", alt: "Bridal portrait close-up with henna" },
-  { src: "/gallery/photo-03.jpg", alt: "Pre-wedding — golden light through palace arches" },
-  { src: "/gallery/photo-05.jpg", alt: "Sunset couple portrait on Kerala backwaters" },
-  { src: "/gallery/photo-07.jpg", alt: "Luxury birthday celebration with sparklers" },
+  { src: "/pic1.jpeg", alt: "Candid bridal moment — bride laughing with joy" },
+  { src: "/pic2.jpeg", alt: "Wedding ceremony — couple at mandap with fire ritual" },
+  { src: "/pic3.jpeg", alt: "Pre-wedding shoot — couple in palace corridor at golden hour" },
+  { src: "/pic4.jpeg", alt: "Cocktail party — elegant wedding reception venue" },
+  { src: "/pic5.jpeg", alt: "Destination wedding — Kerala backwaters at sunset" },
+  { src: "/pic6.jpeg", alt: "Housewarming ceremony — grihapravesh ritual" },
+  { src: "/pic7.jpeg", alt: "Birthday celebration — sparklers and golden candlelight" },
+  { src: "/pic8.jpeg", alt: "Sunset silhouette — couple at golden hour" },
+  { src: "/pic9.jpeg", alt: "Bridal portrait close-up with henna" },
+  { src: "/pic10.jpeg", alt: "Pre-wedding — golden light through palace arches" },
+  { src: "/pic11.jpeg", alt: "Sunset couple portrait on Kerala backwaters" },
+  { src: "/pic12.jpeg", alt: "Luxury birthday celebration with sparklers" },
+  { src: "/pic13.jpeg", alt: "Candid bridal moment — bride laughing with joy" },
+  { src: "/pic14.jpeg", alt: "Wedding ceremony — couple at mandap with fire ritual" },
+  { src: "/pic15.jpeg", alt: "Pre-wedding shoot — couple in palace corridor at golden hour" },
+  { src: "/pic16.jpeg", alt: "Cocktail party — elegant wedding reception venue" },
+  { src: "/pic17.jpeg", alt: "Destination wedding — Kerala backwaters at sunset" },
+  { src: "/pic18.jpeg", alt: "Candid bridal moment — bride laughing with joy" },
+  { src: "/pic19.jpeg", alt: "Wedding ceremony — couple at mandap with fire ritual" },
 ];
 
 export default function GallerySection() {
