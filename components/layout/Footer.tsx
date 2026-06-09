@@ -24,20 +24,20 @@ export default function Footer() {
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 48px" }} className="footer-inner">
         
-        {/* Main 3 Columns */}
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "48px", marginBottom: "80px" }} className="footer-grid">
+        {/* Main Columns Stacked and Centered */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "56px", marginBottom: "80px", textAlign: "center" }} className="footer-grid">
           
-          {/* Left: Logo & Tagline */}
-          <div style={{ flex: "1" }}>
-            <div style={{ position: "relative", height: "48px", width: "50px", marginBottom: "24px" }}>
-              <Image src="/logo.png" alt="Mathana Events Logo" fill sizes="120px" style={{ objectFit: "contain" }} />
+          {/* Top: Logo & Tagline */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ position: "relative", height: "80px", width: "80px", marginBottom: "32px" }}>
+              <Image src="/logo.png" alt="Mathana Events Logo" fill sizes="160px" style={{ objectFit: "contain" }} />
             </div>
             <p
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: "italic",
                 fontWeight: 300,
-                fontSize: "24px",
+                fontSize: "28px",
                 color: "var(--cream)",
                 lineHeight: 1.2,
                 maxWidth: "280px",
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           {/* Center: Navigation Links */}
-          <div style={{ flex: "1", display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }} className="footer-nav">
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "32px", alignItems: "center" }} className="footer-nav">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -69,8 +69,8 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Right: Socials */}
-          <div style={{ flex: "1", display: "flex", justifyContent: "flex-end", gap: "24px", alignItems: "flex-start" }} className="footer-social">
+          {/* Bottom: Socials */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "32px", alignItems: "center" }} className="footer-social">
             <a href="https://instagram.com/mathanaevents" target="_blank" rel="noreferrer" className="social-icon">
               {/* Simple Instagram SVG */}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -99,18 +99,20 @@ export default function Footer() {
         <div
           style={{
             borderTop: "1px solid rgba(201,168,76,0.15)",
-            paddingTop: "24px",
+            paddingTop: "32px",
             display: "flex",
-            justifyContent: "space-between",
+            flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
+            gap: "16px"
           }}
           className="footer-bottom"
         >
-          <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 200, fontSize: "9px", color: "var(--cream-dim)" }}>
+          <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 200, fontSize: "10px", color: "var(--cream-dim)", letterSpacing: "0.1em" }}>
             &copy; 2025 Mathana Events &middot; All Rights Reserved
           </span>
-          <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 200, fontSize: "9px", color: "var(--cream-dim)" }}>
-            Designed & Developed by <a href="https://webibi.tech" target="_blank" rel="noreferrer" style={{ color: "var(--gold)" }}>Webibi.tech</a>
+          <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "11px", color: "var(--cream-dim)", letterSpacing: "0.1em" }}>
+            Designed & Developed by <a href="https://webibi.tech" target="_blank" rel="noreferrer" className="webibi-link" style={{ color: "var(--gold)", fontWeight: 600, textDecoration: "none", letterSpacing: "0.15em", textShadow: "0 0 12px rgba(201,168,76,0.5)", transition: "all 0.3s ease" }}>WEBIBI.TECH</a>
           </span>
         </div>
       </div>
@@ -124,8 +126,12 @@ export default function Footer() {
             transition: transform 300ms ease, filter 300ms ease;
           }
           .social-icon:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
             filter: brightness(1.3);
+          }
+          .webibi-link:hover {
+            text-shadow: 0 0 20px rgba(201,168,76,0.9) !important;
+            filter: brightness(1.2);
           }
         }
 
@@ -134,20 +140,12 @@ export default function Footer() {
             padding: 0 24px !important;
           }
           .footer-grid {
-            flex-direction: column !important;
-            gap: 40px !important;
-            margin-bottom: 48px !important;
+            gap: 48px !important;
+            margin-bottom: 56px !important;
           }
           .footer-nav {
-            align-items: flex-start !important;
-          }
-          .footer-social {
-            justify-content: flex-start !important;
-          }
-          .footer-bottom {
             flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 16px !important;
+            gap: 24px !important;
           }
         }
       `}</style>
