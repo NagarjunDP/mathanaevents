@@ -204,10 +204,11 @@ export default function HeroSection() {
         }}
       >
         <div
+          className={!showVideo ? "hero-bg-zoom" : ""}
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "url('/images/hero-poster.jpg')",
+            backgroundImage: "url('/pic1.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             zIndex: 0,
@@ -326,6 +327,15 @@ export default function HeroSection() {
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        /* Loading Zoom Animation */
+        @keyframes subtleZoom {
+          from { transform: scale(1); }
+          to { transform: scale(1.15); }
+        }
+        .hero-bg-zoom {
+          animation: subtleZoom 8s ease-out forwards;
         }
 
         /* Video iframe */
