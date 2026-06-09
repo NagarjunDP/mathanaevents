@@ -8,11 +8,11 @@ const categories = ["ALL", "WEDDING", "CANDID", "PRE-WEDDING", "EVENTS"];
 // Dummy data for 20 slots
 const allPhotos = Array.from({ length: 20 }, (_, i) => ({
   id: String(i + 1),
-  // We'll map to our dummy photos 1-6 repeatedly for the placeholder
-  src: `/gallery/photo-0${(i % 6) + 1}.jpg`,
+  // We'll map to our dummy photos 1-8 repeatedly for the placeholder
+  src: `/gallery/photo-0${(i % 8) + 1}.jpg`,
   type: categories[(i % 4) + 1], // distribute across categories
-  // Varying aspect ratios for masonry effect
-  aspectRatio: i % 3 === 0 ? "3/4" : i % 4 === 0 ? "16/9" : "1/1",
+  // Strict portrait aspect ratio for all 20 photos as requested
+  aspectRatio: "3/4",
 }));
 
 export default function PhotographyPage() {
@@ -180,12 +180,13 @@ export default function PhotographyPage() {
         }
 
         .masonry-grid {
-          column-count: 3;
-          column-gap: 24px;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
         }
         
         .photo-item {
-          display: inline-block;
+          display: block;
           width: 100%;
         }
 
@@ -239,13 +240,19 @@ export default function PhotographyPage() {
 
         @media (max-width: 1024px) {
           .masonry-grid {
-            column-count: 2;
+            grid-template-columns: repeat(3, 1fr);
           }
         }
         
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .masonry-grid {
-            column-count: 1;
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .masonry-grid {
+            grid-template-columns: 1fr;
           }
           .lightbox-nav {
             width: 48px;

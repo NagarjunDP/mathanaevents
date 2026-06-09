@@ -109,7 +109,7 @@ export default function Preloader() {
         </div>
 
         {/* Brand Name (PHASE 3) */}
-        <div className="brand-name-wrapper">
+        <div className="brand-name-wrapper preloader-name">
           {brandName.map((char, i) => (
             <span
               key={i}

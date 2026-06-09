@@ -2,6 +2,9 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { useTextMagnet } from "@/hooks/useTextMagnet";
+import { SplitText } from "gsap-trial/dist/SplitText";
+import Preloader from "@/components/ui/Preloader";
+import LiquidButton from "@/components/ui/LiquidButton";
 
 export default function HeroSection() {
   const [isAbbreviated, setIsAbbreviated] = useState(false);
@@ -84,19 +87,96 @@ export default function HeroSection() {
     };
   }, []);
 
-  // Letter stagger entrance for H1
+  // GSAP Entrance Animations
   useEffect(() => {
     const isShown = typeof window !== "undefined" && localStorage.getItem("preloader_shown");
     const delay = isShown ? 1.4 : 4.2;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".hero-title-char",
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.03, ease: "power3.out", delay }
-      );
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion) {
+        gsap.set(".hero-location-tag, .hero-location-line, .char-split, .hero-descriptor, .hero-cta-group", { opacity: 1, y: 0, width: "100%", scaleX: 1 });
+        // Restore location lines
+        gsap.set(".hero-location-line", { width: window.innerWidth <= 768 ? 20 : 40 });
+        return;
+      }
+
+      const tl = gsap.timeline({ delay });
+
+      // 0ms — location tag lines draw outward + text fades in
+      tl.from(".hero-location-tag", { opacity: 0, duration: 0.8, ease: "power2.out" }, 0)
+        .from(".hero-location-line", { width: 0, duration: 0.8, ease: "power2.out" }, 0)
+        // 180ms  — "Your Love Story." chars stagger in (40ms per char)
+        .from(".hero-line-a .char-split", { opacity: 0, y: 30, duration: 0.8, stagger: 0.04, ease: "power3.out" }, 0.18)
+        // 420ms  — "Shot Like a Film." chars stagger in (40ms per char)  
+        .from(".hero-line-b .char-split", { opacity: 0, y: 30, duration: 0.8, stagger: 0.04, ease: "power3.out" }, 0.42)
+        // 680ms  — descriptor lines fade up
+        .from(".hero-descriptor", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.68)
+        // 880ms  — CTA buttons slide up + fade in
+        .from(".hero-cta-group", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.88);
     }, heroRef);
+    
     return () => ctx.revert();
+  }, []);
+
+  // Mobile Parallax Effect
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia('(pointer: coarse)').matches) return;
+
+    const heroSection = heroRef.current;
+    const heroMedia = document.querySelector('.hero-video-iframe') as HTMLElement;
+    
+    if (!heroSection || !heroMedia) return;
+
+    let ticking = false;
+    let lastScrollY = 0;
+
+    heroMedia.style.willChange = 'transform';
+    heroMedia.style.transformOrigin = 'center center';
+    heroMedia.style.transform = 'translate(-50%, -50%) scale(1.15)';
+
+    const updateParallax = () => {
+      const scrollY = window.scrollY;
+      const heroHeight = heroSection.offsetHeight;
+      
+      if (scrollY < heroHeight * 1.5) {
+        const parallaxOffset = scrollY * 0.4;
+        heroMedia.style.transform = `translate(-50%, calc(-50% + ${parallaxOffset}px)) scale(1.15)`;
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateParallax();
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          window.removeEventListener('scroll', handleScroll);
+          if (heroMedia) {
+            heroMedia.style.transform = 'translate(-50%, -50%) scale(1.15)';
+          }
+        } else {
+          window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+      });
+    }, { threshold: 0 });
+
+    heroObserver.observe(heroSection);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      heroObserver.disconnect();
+    };
   }, []);
 
   const scrollToEnquiry = () => {
@@ -107,21 +187,14 @@ export default function HeroSection() {
     document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const lineAText = "Your Love Story.";
+  const lineBText = "Shot Like a Film.";
+
   return (
     <section
       id="hero"
       ref={heroRef}
-      className="film-grain parallax-wrap"
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100dvh",
-        minHeight: "600px",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="film-grain parallax-wrap hero-section"
     >
       {/* ── Background Layer ── */}
       <div
@@ -154,34 +227,18 @@ export default function HeroSection() {
             zIndex: 1,
           }}
         >
+          {/* Vimeo Video */}
           <iframe
+            className="hero-video-iframe"
             src={`https://player.vimeo.com/video/${vimeoId}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&app_id=58479`}
             title="Hero Background"
             allow="autoplay; fullscreen; picture-in-picture"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              width: "max(100vw, 177.78vh)",
-              height: "max(100vh, 56.25vw)",
-              transform: "translate(-50%, -50%)",
-              border: "none",
-              pointerEvents: "none",
-            }}
           />
         </div>
       </div>
 
       {/* ── Gradient Overlay ── */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(165deg, rgba(6,6,6,0.55) 0%, rgba(6,6,6,0.3) 50%, rgba(6,6,6,0.7) 100%)",
-          zIndex: 1,
-          pointerEvents: "none",
-        }}
-      />
+      <div className="hero-gradient" />
 
       {/* ── Gold Accent Dots ── */}
       <div style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
@@ -224,167 +281,224 @@ export default function HeroSection() {
       />
 
       {/* ── Text Content Layer ── */}
-      <div
-        ref={textRef}
-        style={{
-          position: "relative",
-          zIndex: 2,
-          textAlign: "center",
-          padding: "0 24px",
-          maxWidth: "1000px",
-          marginTop: "10vh",
-        }}
-      >
-        <p style={{
-          fontFamily: "'Raleway', sans-serif",
-          fontWeight: 200,
-          fontSize: "10px",
-          color: "var(--gold)",
-          letterSpacing: "0.5em",
-          textTransform: "uppercase",
-          marginBottom: "32px",
-          animation: "slideUpFade 800ms ease-out forwards",
-          animationDelay: isAbbreviated ? "1.3s" : "4.0s",
-          opacity: 0,
-        }}>
-          BENGALURU &middot; EST. 2016
-        </p>
+      <div ref={textRef} className="hero-content">
+        <div className="hero-location-wrapper">
+          <div className="hero-location-line" />
+          <span className="hero-location-tag">BENGALURU &middot; EST. 2016</span>
+          <div className="hero-location-line" />
+        </div>
 
-        <h1
-          className="magnetic-text hero-h1"
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "clamp(52px, 8vw, 96px)",
-            color: "var(--cream)",
-            lineHeight: 1,
-            marginBottom: "0",
-          }}
-        >
-          {"Where Love".split("").map((c, i) => (
-            <span key={i} className="hero-title-char char-split" style={{ display: c === " " ? "inline" : "inline-block" }}>{c}</span>
-          ))}
-        </h1>
-        <h1
-          className="magnetic-text hero-h1"
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "clamp(52px, 8vw, 96px)",
-            color: "var(--cream)",
-            lineHeight: 1,
-            marginBottom: "40px",
-          }}
-        >
-          {"Becomes Cinema".split("").map((c, i) => (
-            <span key={i} className="hero-title-char char-split" style={{ display: c === " " ? "inline" : "inline-block" }}>{c}</span>
-          ))}
+        <h1 className="magnetic-text hero-h1">
+          <div className="hero-h1-line hero-line-a">
+            {lineAText.split("").map((c, i) => (
+              c === " " 
+                ? <span key={`a-${i}`} className="char-space"> </span> 
+                : <span key={`a-${i}`} className="char-split">{c}</span>
+            ))}
+          </div>
+          <div className="hero-h1-line hero-line-b">
+            {lineBText.split("").map((c, i) => (
+              c === " " 
+                ? <span key={`b-${i}`} className="char-space"> </span> 
+                : <span key={`b-${i}`} className="char-split">{c}</span>
+            ))}
+          </div>
         </h1>
 
-        <p style={{
-          fontFamily: "'Raleway', sans-serif",
-          fontWeight: 200,
-          fontSize: "13px",
-          letterSpacing: "0.25em",
-          color: "var(--cream-dim)",
-          textTransform: "uppercase",
-          marginBottom: "48px",
-          animation: "slideUpFade 800ms ease-out forwards",
-          animationDelay: isAbbreviated ? "1.8s" : "4.6s",
-          opacity: 0,
-        }}>
-          Premium Wedding Company &middot; Photography & Videography
-        </p>
+        <div className="hero-descriptor">
+          <div>Premium Wedding Company</div>
+          <div>Photography & Videography</div>
+        </div>
 
-        <div style={{
-          display: "flex",
-          gap: "24px",
-          justifyContent: "center",
-          alignItems: "center",
-          animation: "slideUpFade 800ms ease-out forwards",
-          animationDelay: isAbbreviated ? "2.0s" : "4.8s",
-          opacity: 0,
-        }}
-        className="hero-buttons cta-group">
-          <button onClick={scrollToEnquiry} className="btn-gold-outline">
-            Book Consultation
-          </button>
-          <button onClick={scrollToFilms} className="btn-text-underline" style={{
-            fontFamily: "'Raleway', sans-serif",
-            fontWeight: 200,
-            fontSize: "10px",
-            letterSpacing: "0.3em",
-            color: "var(--cream)",
-            textTransform: "uppercase",
-            position: "relative",
-            padding: "8px 0"
-          }}>
-            View Films &darr;
-          </button>
+        <div className="hero-cta-group">
+          <LiquidButton onClick={scrollToEnquiry} className="btn-primary">
+            Book a Consultation
+          </LiquidButton>
         </div>
       </div>
 
-      {/* ── Scroll Indicator ── */}
-      <div style={{
-        position: "absolute",
-        bottom: "40px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 2,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "16px",
-      }}>
-        <div style={{
-          width: "1px",
-          height: "40px",
-          background: "var(--gold)",
-          animation: "pulseAlpha 2s infinite",
-        }} />
-        <span style={{
-          fontFamily: "'Raleway', sans-serif",
-          fontWeight: 200,
-          fontSize: "8px",
-          letterSpacing: "0.5em",
-          color: "var(--gold)",
-          textTransform: "uppercase",
-        }}>
-          SCROLL
-        </span>
-      </div>
+
 
       <style jsx>{`
-        @keyframes slideUpFade {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulseAlpha {
-          0% { opacity: 1; }
-          50% { opacity: 0.3; }
-          100% { opacity: 1; }
-        }
-        
-        .btn-text-underline::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
+        /* Hero Section Base */
+        .hero-section {
+          position: relative;
           width: 100%;
-          height: 1px;
-          background: var(--cream);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 300ms ease;
+          height: 100dvh;
+          min-height: 600px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        @media (hover: hover) {
-          .btn-text-underline:hover::after {
-            transform: scaleX(1);
+
+        /* Video iframe */
+        .hero-video-iframe {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: max(100vw, 177.78vh);
+          height: max(100vh, 56.25vw);
+          transform: translate(-50%, -50%);
+          border: none;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        /* Gradients */
+        .hero-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(165deg, rgba(6,6,6,0.55) 0%, rgba(6,6,6,0.3) 50%, rgba(6,6,6,0.7) 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        /* Text Content Wrapper */
+        .hero-content {
+          position: absolute;
+          bottom: 15%;
+          left: 80px;
+          max-width: 900px;
+          z-index: 3;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        /* Line 1 */
+        .hero-location-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+        .hero-location-line {
+          width: 40px;
+          height: 1px;
+          background-color: var(--gold);
+        }
+        .hero-location-tag {
+          font-family: 'Raleway', sans-serif;
+          font-weight: 200;
+          font-size: 9px;
+          letter-spacing: 0.55em;
+          color: var(--gold);
+          text-transform: uppercase;
+        }
+
+        /* H1 */
+        .hero-h1 {
+          font-family: 'Cormorant Garamond', serif;
+          font-style: italic;
+          font-weight: 300;
+          font-size: clamp(44px, 9vw, 108px);
+          color: var(--cream);
+          line-height: 1.25;
+          margin: 0 0 24px 0;
+          text-align: left;
+        }
+        .hero-h1-line {
+          display: block;
+          padding: 0.1em 0;
+        }
+        .char-split {
+          display: inline-block;
+          line-height: 1.25;
+        }
+        .char-space {
+          display: inline;
+        }
+
+        /* Descriptor */
+        .hero-descriptor {
+          font-family: 'Raleway', sans-serif;
+          font-weight: 200;
+          font-size: 11px;
+          letter-spacing: 0.3em;
+          color: rgba(242, 237, 228, 0.6);
+          line-height: 1.8;
+          margin-bottom: 32px;
+          text-align: left;
+        }
+        .hero-descriptor div {
+          margin: 0;
+        }
+
+        /* CTA */
+        .hero-cta-group {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+
+
+
+        /* Mobile specific overrides */
+        @media (max-width: 768px) {
+          .hero-section {
+            height: 100dvh;
+            min-height: 600px;
+          }
+
+          .hero-gradient {
+            background: linear-gradient(to top, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.3) 60%, rgba(6,6,6,0.1) 100%);
+          }
+          .hero-content {
+            bottom: 18%;
+            left: 0;
+            right: 0;
+            padding: 0 28px;
+            max-width: 100%;
+            align-items: center;
+            text-align: center;
+          }
+          .hero-location-wrapper {
+            gap: 8px;
+          }
+          .hero-location-tag {
+            font-size: 8px;
+            letter-spacing: 0.5em;
+          }
+          .hero-location-line {
+            width: 20px;
+          }
+          .hero-h1 {
+            font-size: clamp(32px, 9vw, 56px);
+            text-align: center;
+          }
+          .hero-h1-line {
+            padding: 0;
+          }
+          .hero-descriptor {
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            line-height: 1.9;
+            text-align: center;
+            color: rgba(242, 237, 228, 0.9); /* Highlight more on mobile */
+          }
+          .hero-cta-group {
+            flex-direction: column;
+            width: 100%;
+            gap: 16px;
+            margin-top: 12px;
+            align-items: center;
+          }
+
+
+
+        @media (max-width: 380px) {
+          .hero-h1 {
+            font-size: 38px;
+          }
+          .hero-content {
+            padding: 0 20px;
+            bottom: 16%;
           }
         }
       `}</style>
     </section>
   );
 }
+

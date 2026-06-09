@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Link from "next/link";
+import LiquidButton from "@/components/ui/LiquidButton";
 
 const VIMEO_ID = "1199519472";
 
@@ -231,26 +231,12 @@ export default function FeaturedFilm() {
               margin: 0,
             }}>Every Celebration, Told Like a Film</h3>
           </div>
-          <Link
+          <LiquidButton
             href="/films"
-            style={{
-              fontFamily: "'Raleway', sans-serif",
-              fontWeight: 200,
-              fontSize: "10px",
-              letterSpacing: "0.35em",
-              color: "rgba(201,168,76,0.85)",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              whiteSpace: "nowrap",
-              transition: "color 0.3s ease",
-            }}
+            className="btn-primary"
           >
             View All Films
-            <span style={{ display: "inline-block", width: "32px", height: "1px", background: "currentColor" }} />
-          </Link>
+          </LiquidButton>
         </div>
       </div>
 

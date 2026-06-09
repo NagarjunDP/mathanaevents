@@ -61,7 +61,7 @@ export default function AtelierPage() {
           style={{
             position: "absolute",
             inset: -50,
-            backgroundImage: "url('/founder-portrait.jpg')", // REPLACE: upload your photo
+            backgroundImage: "url('/jb.jpg')", // Founder image
             backgroundSize: "cover",
             backgroundPosition: "center 20%",
             zIndex: 0,
@@ -110,8 +110,8 @@ export default function AtelierPage() {
         
         {/* Block 1: From Films to Weddings */}
         <div className="fade-up-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center", marginBottom: "160px" }}>
-          <div style={{ position: "relative", aspectRatio: "3/4", width: "100%" }}>
-            <Image src="/gallery/photo-02.jpg" alt="Jagadish Gowda on set" fill style={{ objectFit: "cover" }} />
+          <div style={{ position: "relative", aspectRatio: "3/4", width: "100%", borderRadius: "4px", overflow: "hidden", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}>
+            <Image src="/jb.jpg" alt="Jagadish Gowda - Founder of Mathana Events" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 100vw, 50vw" priority />
           </div>
           <div>
             <p className="section-label" style={{ marginBottom: "24px" }}>From Films to Weddings</p>
@@ -132,8 +132,33 @@ export default function AtelierPage() {
               lineHeight: 1.8,
               color: "var(--cream-dim)",
             }}>
-              With over 8 years of experience as a working film cinematographer in the Kannada film industry, including credits like <em>Maarige Daari</em> and numerous album songs, my approach to weddings is fundamentally different. I don&apos;t just capture events; I direct light, frame emotion, and craft a cinematic narrative that elevates your love story to the silver screen.
+              With over 8 years of experience as a working film cinematographer in the Kannada film industry, including credits like <em>Maarige Daari</em>, <em>Ninna Gungalli</em>, and numerous album songs, my approach to capturing moments is fundamentally different. Embarking on the <strong>Mathana Events</strong> journey, I decided to blend the grandeur of cinema with the intimacy of real life. I don't just capture events; I direct light, frame emotion, and craft a cinematic narrative that elevates your love story to the silver screen.
             </p>
+          </div>
+        </div>
+
+        {/* Block 1.5: Recent Work (Video) */}
+        <div className="fade-up-block" style={{ marginBottom: "160px", textAlign: "center" }}>
+          <p className="section-label" style={{ marginBottom: "24px" }}>Recent Masterpiece</p>
+          <div style={{
+            position: "relative",
+            width: "100%",
+            paddingBottom: "56.25%", // 16:9 aspect ratio
+            height: 0,
+            overflow: "hidden",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+            border: "1px solid rgba(201,168,76,0.3)",
+            borderRadius: "4px"
+          }}>
+            <iframe
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+              src="https://www.youtube.com/embed/xAxuYZ1snfg?si=77gSUqcHIq--tBJG"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
 

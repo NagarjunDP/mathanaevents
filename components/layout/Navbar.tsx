@@ -65,7 +65,9 @@ export default function Navbar() {
       >
         {/* LEFT SIDE: Big Brand Logo */}
         <Link href="/" className="navbar-logo-link">
-          <img src="/logo.png" alt="Mathana Events Logo" className="navbar-logo" />
+          <div className="navbar-logo-wrapper">
+            <img src="/logo.png" alt="Mathana Events Logo" className="navbar-logo" />
+          </div>
         </Link>
 
         {/* CENTER SIDE: Absolutely Centered Brand Text */}
@@ -224,7 +226,11 @@ export default function Navbar() {
           object-fit: contain;
           filter: drop-shadow(0 0 8px rgba(201,168,76,0.3));
           flex-shrink: 0;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s ease;
+          transition: height 0.3s ease;
+        }
+
+        .navbar-logo-wrapper {
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           transform: scale(1.4); /* Scaled up to visually bypass empty padding */
           transform-origin: left center;
         }
@@ -586,10 +592,11 @@ export default function Navbar() {
           }
         }
 
-        /* MOBILE OVERRIDES */
         @media (max-width: 768px) {
           .navbar-logo {
             height: 60px;
+          }
+          .navbar-logo-wrapper {
             transform: scale(1.45);
           }
           .navbar-name {
@@ -605,6 +612,8 @@ export default function Navbar() {
         @media (max-width: 480px) {
           .navbar-logo {
             height: 52px;
+          }
+          .navbar-logo-wrapper {
             transform: scale(1.5);
           }
           .navbar-name {

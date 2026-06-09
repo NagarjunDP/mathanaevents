@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import LiquidButton from "@/components/ui/LiquidButton";
 
 const eventTypes = [
   "Wedding",
@@ -188,9 +189,9 @@ export default function EnquirySection() {
               />
             </FormField>
 
-            <button id="submit-enquiry" type="submit" className="btn-gold-filled">
+            <LiquidButton id="submit-enquiry" type="submit" className="btn-primary" style={{ width: "100%" }}>
               Send Enquiry
-            </button>
+            </LiquidButton>
 
             {/* WhatsApp */}
             <div style={{ textAlign: "center", marginTop: "24px" }}>

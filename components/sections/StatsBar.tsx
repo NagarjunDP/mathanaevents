@@ -44,6 +44,7 @@ function StatItem({ end, suffix, label }: { end: number; suffix: string; label: 
   return (
     <div
       ref={ref}
+      className={`stat-item ${triggered ? 'revealed' : ''}`}
       style={{ textAlign: "center", padding: "20px" }}
     >
       <div className="stat-number">
