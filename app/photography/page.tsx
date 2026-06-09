@@ -5,14 +5,11 @@ import Image from "next/image";
 
 const categories = ["ALL", "WEDDING", "CANDID", "PRE-WEDDING", "EVENTS"];
 
-// Dummy data for 20 slots
-const allPhotos = Array.from({ length: 20 }, (_, i) => ({
+// Client's 19 Portrait Photos
+const allPhotos = Array.from({ length: 19 }, (_, i) => ({
   id: String(i + 1),
-  // We'll map to our dummy photos 1-8 repeatedly for the placeholder
-  src: `/gallery/photo-0${(i % 8) + 1}.jpg`,
+  src: `/pic${i + 1}.jpeg`,
   type: categories[(i % 4) + 1], // distribute across categories
-  // Strict portrait aspect ratio for all 20 photos as requested
-  aspectRatio: "3/4",
 }));
 
 export default function PhotographyPage() {
@@ -45,7 +42,7 @@ export default function PhotographyPage() {
   };
 
   return (
-    <div style={{ background: "var(--black)", minHeight: "100vh", paddingTop: "160px" }}>
+    <div style={{ background: "var(--charcoal)", minHeight: "100vh", paddingTop: "160px" }}>
       
       {/* HEADER */}
       <section style={{ textAlign: "center", marginBottom: "80px", padding: "0 24px" }}>
@@ -88,7 +85,7 @@ export default function PhotographyPage() {
         ))}
       </div>
 
-      {/* MASONRY GRID (CSS Columns approximation) */}
+      {/* TRUE MASONRY GRID */}
       <section style={{ maxWidth: "1600px", margin: "0 auto", padding: "0 48px 120px" }}>
         <div ref={gridRef} className="masonry-grid">
           {filteredPhotos.map((photo, i) => (
@@ -96,18 +93,17 @@ export default function PhotographyPage() {
               key={photo.id}
               className="photo-item"
               onClick={() => setLightboxIndex(i)}
-              style={{
-                position: "relative",
-                aspectRatio: photo.aspectRatio,
-                overflow: "hidden",
-                marginBottom: "24px",
-                cursor: "pointer",
-                borderRadius: "4px",
-                breakInside: "avoid",
-              }}
             >
-              <Image src={photo.src} alt={`Photography ${i}`} fill style={{ objectFit: "cover" }} className="photo-img" />
-              <div className="photo-overlay" />
+              <div className="photo-wrapper">
+                {/* Using standard img for perfect masonry height without hardcoded aspect ratios */}
+                <img 
+                  src={photo.src} 
+                  alt={`Photography ${i}`} 
+                  className="photo-img" 
+                  loading="lazy"
+                />
+                <div className="photo-overlay" />
+              </div>
             </div>
           ))}
         </div>
@@ -179,19 +175,33 @@ export default function PhotographyPage() {
           transform: scaleX(0);
         }
 
+        /* True Masonry CSS Columns */
         .masonry-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
+          column-count: 4;
+          column-gap: 24px;
         }
         
         .photo-item {
-          display: block;
+          display: inline-block;
           width: 100%;
+          margin-bottom: 24px;
+          break-inside: avoid;
+          cursor: pointer;
+        }
+
+        .photo-wrapper {
+          position: relative;
+          width: 100%;
+          border-radius: 4px;
+          overflow: hidden;
+          background: rgba(242, 237, 228, 0.05); /* very subtle placeholder background */
         }
 
         .photo-img {
-          transition: transform 300ms cubic-bezier(0.25, 1, 0.5, 1);
+          display: block;
+          width: 100%;
+          height: auto;
+          transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .photo-overlay {
@@ -209,11 +219,13 @@ export default function PhotographyPage() {
           width: 64px;
           height: 64px;
           display: flex;
-          alignItems: center;
-          justifyContent: center;
-          background: rgba(6,6,6,0.5);
+          align-items: center; /* FIXED SYNTAX ERROR */
+          justify-content: center;
+          background: rgba(6,6,6,0.6);
           border-radius: 50%;
           transition: background 300ms ease;
+          z-index: 101;
+          backdrop-filter: blur(4px);
         }
         .lightbox-nav.left { left: 32px; }
         .lightbox-nav.right { right: 32px; }
@@ -222,14 +234,14 @@ export default function PhotographyPage() {
           .filter-tab:hover {
             color: var(--gold) !important;
           }
-          .photo-item:hover .photo-img {
+          .photo-wrapper:hover .photo-img {
             transform: scale(1.04);
           }
-          .photo-item:hover .photo-overlay {
+          .photo-wrapper:hover .photo-overlay {
             background: rgba(201,168,76,0.12);
           }
           .lightbox-nav:hover {
-            background: rgba(201,168,76,0.2);
+            background: rgba(201,168,76,0.3);
           }
         }
 
@@ -240,19 +252,19 @@ export default function PhotographyPage() {
 
         @media (max-width: 1024px) {
           .masonry-grid {
-            grid-template-columns: repeat(3, 1fr);
+            column-count: 3;
           }
         }
         
         @media (max-width: 768px) {
           .masonry-grid {
-            grid-template-columns: repeat(2, 1fr);
+            column-count: 2;
           }
         }
         
         @media (max-width: 480px) {
           .masonry-grid {
-            grid-template-columns: 1fr;
+            column-count: 1;
           }
           .lightbox-nav {
             width: 48px;
