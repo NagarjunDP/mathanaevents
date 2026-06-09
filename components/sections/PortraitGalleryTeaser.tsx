@@ -7,11 +7,11 @@ import LiquidButton from "@/components/ui/LiquidButton";
 import { useRouter } from "next/navigation";
 
 const teaserPhotos = [
-  { id: 1, src: "/pic1.jpeg", alt: "Mathana Portrait 1" },
-  { id: 2, src: "/pic11.jpeg", alt: "Mathana Portrait 2" },
-  { id: 3, src: "/pic3.jpeg", alt: "Mathana Portrait 3" },
-  { id: 4, src: "/pic2.jpeg", alt: "Mathana Portrait 4" },
-  { id: 5, src: "/pic10.jpeg", alt: "Mathana Portrait 5" },
+  { id: 1, src: "/pic1.jpeg", alt: "Mathana Portrait 1", title: "The Couple", subtitle: "Timeless Romance" },
+  { id: 2, src: "/pic4.jpeg", alt: "Mathana Portrait 2", title: "Fine Jewelry", subtitle: "Bridal Details" },
+  { id: 3, src: "/pic3.jpeg", alt: "Mathana Portrait 3", title: "The Bride", subtitle: "Elegance" },
+  { id: 4, src: "/pic12.jpeg", alt: "Mathana Portrait 4", title: "Bridal Portraits", subtitle: "Candid Moments" },
+  { id: 5, src: "/pic11.jpeg", alt: "Mathana Portrait 5", title: "Premium Bridal", subtitle: "Editorial" },
 ];
 
 export default function PortraitGalleryTeaser() {
@@ -112,6 +112,10 @@ export default function PortraitGalleryTeaser() {
                   className="pgt-img"
                   priority={i < 2}
                 />
+                <div className="pgt-text-overlay">
+                  <span className="pgt-slide-subtitle">{photo.subtitle}</span>
+                  <h3 className="pgt-slide-title">{photo.title}</h3>
+                </div>
               </div>
             </div>
           ))}
@@ -195,11 +199,51 @@ export default function PortraitGalleryTeaser() {
         }
 
         .pgt-img {
-          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
         }
 
         .pgt-slide:hover .pgt-img {
           transform: scale(1.06);
+          filter: brightness(0.85);
+        }
+
+        .pgt-text-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 60px 32px 32px;
+          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+          color: var(--cream);
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          opacity: 0.9;
+          transform: translateY(5px);
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+
+        .pgt-slide:hover .pgt-text-overlay {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        .pgt-slide-subtitle {
+          font-family: 'Raleway', sans-serif;
+          font-weight: 300;
+          font-size: 9px;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: var(--gold);
+        }
+
+        .pgt-slide-title {
+          font-family: 'Cormorant Garamond', serif;
+          font-style: italic;
+          font-weight: 300;
+          font-size: 32px;
+          margin: 0;
+          line-height: 1.1;
         }
 
         .pgt-final-slide {
