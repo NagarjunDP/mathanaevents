@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation";
 
 const teaserPhotos = [
   { id: 1, src: "/pic1.jpeg", alt: "Mathana Portrait 1", title: "The Couple", subtitle: "Timeless Romance" },
-  { id: 2, src: "/pic4.jpeg", alt: "Mathana Portrait 2", title: "Fine Jewelry", subtitle: "Bridal Details" },
+  { id: 2, src: "/pic11.jpeg", alt: "Mathana Portrait 2", title: "Fine Jewelry", subtitle: "Bridal Details" },
   { id: 3, src: "/pic3.jpeg", alt: "Mathana Portrait 3", title: "The Bride", subtitle: "Elegance" },
-  { id: 4, src: "/pic12.jpeg", alt: "Mathana Portrait 4", title: "Bridal Portraits", subtitle: "Candid Moments" },
-  { id: 5, src: "/pic11.jpeg", alt: "Mathana Portrait 5", title: "Premium Bridal", subtitle: "Editorial" },
+  { id: 4, src: "/pic12.jpeg", alt: "Mathana Portrait 4", title: "Couple Portraits", subtitle: "Candid Moments" },
+  { id: 5, src: "/pic4.jpeg", alt: "Mathana Portrait 5", title: "Couple Candids", subtitle: "Editorial" },
 ];
 
 export default function PortraitGalleryTeaser() {
@@ -22,7 +22,7 @@ export default function PortraitGalleryTeaser() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
+
     let ctx = gsap.context(() => {
       // Pinning and horizontal scroll on all devices
       const track = trackRef.current;
@@ -43,7 +43,7 @@ export default function PortraitGalleryTeaser() {
           }
         });
       }
-      
+
       // Image reveal animations
       gsap.fromTo(
         ".pgt-slide",
@@ -78,61 +78,61 @@ export default function PortraitGalleryTeaser() {
           overflow: "hidden",
         }}
       >
-      <div className="pgt-header">
-        <div>
-          <p className="section-label dark-label">STILLS THAT SPEAK</p>
-          <h2 className="magnetic-text pgt-title">
-            The Gallery
-          </h2>
+        <div className="pgt-header">
+          <div>
+            <p className="section-label dark-label">STILLS THAT SPEAK</p>
+            <h2 className="magnetic-text pgt-title">
+              The Gallery
+            </h2>
+          </div>
+          <LiquidButton
+            onClick={() => router.push("/photography")}
+            className="btn-primary"
+            style={{ borderColor: "var(--charcoal)", color: "var(--charcoal)" }}
+          >
+            View All
+          </LiquidButton>
         </div>
-        <LiquidButton 
-          onClick={() => router.push("/photography")} 
-          className="btn-primary" 
-          style={{ borderColor: "var(--charcoal)", color: "var(--charcoal)" }}
-        >
-          View All
-        </LiquidButton>
-      </div>
 
-      {/* The Sliding Track */}
-      <div className="pgt-track-wrapper">
-        <div ref={trackRef} className="pgt-track">
-          {teaserPhotos.map((photo, i) => (
-            <div 
-              key={photo.id} 
-              className="pgt-slide"
-              onClick={() => router.push("/photography")}
-            >
-              <div className="pgt-img-wrapper">
-                <Image 
-                  src={photo.src} 
-                  alt={photo.alt} 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  className="pgt-img"
-                  priority={i < 2}
-                />
-                <div className="pgt-text-overlay">
-                  <span className="pgt-slide-subtitle">{photo.subtitle}</span>
-                  <h3 className="pgt-slide-title">{photo.title}</h3>
+        {/* The Sliding Track */}
+        <div className="pgt-track-wrapper">
+          <div ref={trackRef} className="pgt-track">
+            {teaserPhotos.map((photo, i) => (
+              <div
+                key={photo.id}
+                className="pgt-slide"
+                onClick={() => router.push("/photography")}
+              >
+                <div className="pgt-img-wrapper">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    className="pgt-img"
+                    priority={i < 2}
+                  />
+                  <div className="pgt-text-overlay">
+                    <span className="pgt-slide-subtitle">{photo.subtitle}</span>
+                    <h3 className="pgt-slide-title">{photo.title}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-          {/* A final slide to encourage clicking "View All" */}
-          <div className="pgt-slide pgt-final-slide" onClick={() => router.push("/photography")}>
-            <h3 className="final-slide-text">Explore the full<br/>Photography collection</h3>
-            <div className="explore-circle">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
+            ))}
+            {/* A final slide to encourage clicking "View All" */}
+            <div className="pgt-slide pgt-final-slide" onClick={() => router.push("/photography")}>
+              <h3 className="final-slide-text">Explore the full<br />Photography collection</h3>
+              <div className="explore-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <style jsx>{`
+        <style jsx>{`
         .pgt-section {
           /* Setup height to at least 100vh for pinning on desktop */
           min-height: 100vh;

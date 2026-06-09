@@ -7,7 +7,7 @@ const navLinks = [
   { label: "PHOTOGRAPHY", href: "/photography" },
   { label: "VIDEOGRAPHY", href: "/videography" },
   { label: "ATELIER", href: "/atelier" },
-  { label: "CONTACT", href: "/contact" },
+  { label: "CONTACT", href: "/#contact" },
 ];
 
 export default function Footer() {

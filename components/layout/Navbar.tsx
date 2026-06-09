@@ -7,7 +7,7 @@ const navLinks = [
   { label: "FILMS", href: "/films", code: "films" },
   { label: "PHOTOGRAPHY", href: "/photography", code: "photo" },
   { label: "ATELIER", href: "/atelier", code: "atelier" },
-  { label: "CONTACT", href: "/contact", code: "contact" },
+  { label: "CONTACT", href: "/#contact", code: "contact" },
 ];
 
 export default function Navbar() {
