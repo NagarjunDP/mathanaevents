@@ -30,7 +30,7 @@ export default function Footer() {
           {/* Left: Logo & Tagline */}
           <div style={{ flex: "1" }}>
             <div style={{ position: "relative", height: "48px", width: "50px", marginBottom: "24px" }}>
-              <Image src="/logo.png" alt="Mathana Events Logo" fill style={{ objectFit: "contain" }} />
+              <Image src="/logo.png" alt="Mathana Events Logo" fill sizes="120px" style={{ objectFit: "contain" }} />
             </div>
             <p
               style={{

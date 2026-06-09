@@ -100,8 +100,9 @@ export default function Preloader() {
           <div className="preloader-logo-wrapper">
             <Image
               src="/logo.png"
-              alt="Mathana Events"
+              alt="Mathana Events Logo"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "contain" }}
               priority
             />

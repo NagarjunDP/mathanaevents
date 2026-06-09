@@ -15,7 +15,8 @@ const teaserPhotos = [
 ];
 
 export default function PortraitGalleryTeaser() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -33,10 +34,10 @@ export default function PortraitGalleryTeaser() {
           x: -scrollDist,
           ease: "none",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: containerRef.current,
             start: "top top",
             end: () => `+=${scrollDist}`,
-            pin: true,
+            pin: pinRef.current,
             scrub: 1,
             invalidateOnRefresh: true,
           }
@@ -54,28 +55,29 @@ export default function PortraitGalleryTeaser() {
           stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: containerRef.current,
             start: "top 80%",
           }
         }
       );
 
-    }, sectionRef);
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="pgt-section"
-      style={{
-        background: "var(--cream)", // Premium light cream
-        color: "var(--charcoal)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+    <div ref={containerRef}>
+      <section
+        ref={pinRef}
+        className="pgt-section"
+        style={{
+          background: "var(--cream)", // Premium light cream
+          color: "var(--charcoal)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
       <div className="pgt-header">
         <div>
           <p className="section-label dark-label">STILLS THAT SPEAK</p>
@@ -266,6 +268,7 @@ export default function PortraitGalleryTeaser() {
           }
         }
       `}</style>
-    </section>
+      </section>
+    </div>
   );
 }
