@@ -77,7 +77,7 @@ export default function EnquiryTeaser() {
             {!submitted ? (
               <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", gap: "56px" }} className="contact-form">
                 
-                <div style={{ display: "flex", gap: "40px" }} className="input-row">
+                <div style={{ display: "flex", gap: "40px" }} className="input-row name-row">
                   <div className="input-group" style={{ flex: 1 }}>
                     <label>First Name</label>
                     <input type="text" required placeholder="e.g. Eleanor" />
@@ -385,8 +385,13 @@ export default function EnquiryTeaser() {
           
           .input-row {
             flex-direction: column;
-            gap: 48px !important;
+            gap: 32px !important;
             width: 100%;
+          }
+          
+          .input-row.name-row {
+            flex-direction: row;
+            gap: 20px !important;
           }
           
           .input-group {
@@ -394,7 +399,7 @@ export default function EnquiryTeaser() {
           }
           
           .contact-form {
-            gap: 56px !important;
+            gap: 40px !important;
           }
           
           .submit-btn-light {
