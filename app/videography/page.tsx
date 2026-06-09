@@ -259,6 +259,9 @@ export default function VideographyPage() {
           padding: "120px 24px 40px",
           borderBottom: "1px solid rgba(179, 146, 59, 0.1)",
           color: "#F2EDE4",
+          width: "100%",
+          maxWidth: "1400px",
+          margin: "0 auto"
         }}
       >
         <p
@@ -273,7 +276,7 @@ export default function VideographyPage() {
             marginBottom: "20px",
           }}
         >
-          OUR WORK
+          <span style={{ whiteSpace: "nowrap" }}>OUR WORK</span>
         </p>
         
         <h1
@@ -288,14 +291,14 @@ export default function VideographyPage() {
             marginBottom: "24px",
           }}
         >
-          <span style={{ display: "block" }}>
+          <span style={{ display: "block", whiteSpace: "nowrap" }}>
             {line1.split("").map((char, index) => (
               <span key={index} className="hero-char" style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}>
                 {char}
               </span>
             ))}
           </span>
-          <span style={{ display: "block", color: "var(--local-gold)" }}>
+          <span style={{ display: "block", color: "var(--local-gold)", whiteSpace: "nowrap" }}>
             {line2.split("").map((char, index) => (
               <span key={index} className="hero-char" style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}>
                 {char}
@@ -316,7 +319,7 @@ export default function VideographyPage() {
             textAlign: "center",
           }}
         >
-          9 Films · Weddings · Pre-Wedding · Celebrations
+          <span style={{ whiteSpace: "nowrap" }}>9 Films · Weddings · Pre-Wedding · Celebrations</span>
         </p>
         
         <div

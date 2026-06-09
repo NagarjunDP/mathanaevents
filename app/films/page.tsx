@@ -464,7 +464,8 @@ export default function FilmsPage() {
             position: "relative",
             zIndex: 10,
             padding: "clamp(32px, 6vw, 80px) clamp(24px, 6vw, 80px)",
-            maxWidth: "860px",
+            width: "100%",
+            maxWidth: "1400px",
           }}
         >
           {/* Category pill */}
@@ -484,7 +485,7 @@ export default function FilmsPage() {
             }}
           >
             <span style={{ display: "inline-block", width: "24px", height: "1px", background: "rgba(201,168,76,0.7)", flexShrink: 0 }} />
-            Weddings · Pre-Wedding · Celebrations
+            <span style={{ whiteSpace: "nowrap" }}>Weddings · Pre-Wedding · Celebrations</span>
           </p>
 
           <h1
@@ -499,14 +500,14 @@ export default function FilmsPage() {
               letterSpacing: "-0.01em",
             }}
           >
-            <span style={{ display: "block", color: "#F2EDE4" }}>
+            <span style={{ display: "block", color: "#F2EDE4", whiteSpace: "nowrap" }}>
               {line1.split("").map((char, index) => (
                 <span key={index} className="hero-char" style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}>
                   {char}
                 </span>
               ))}
             </span>
-            <span style={{ display: "block", color: "#C9A84C" }}>
+            <span style={{ display: "block", color: "#C9A84C", whiteSpace: "nowrap" }}>
               {line2.split("").map((char, index) => (
                 <span key={index} className="hero-char" style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}>
                   {char}
