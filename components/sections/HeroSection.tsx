@@ -208,7 +208,7 @@ export default function HeroSection() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "url('/pic1.jpeg')",
+            backgroundImage: "url('/p1.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             zIndex: 0,
