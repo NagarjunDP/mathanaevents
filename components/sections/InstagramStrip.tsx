@@ -52,12 +52,19 @@ export default function InstagramStrip() {
               className="ig-photo-link"
               style={{
                 position: "relative",
-                flexShrink: 0,
+                flex: "0 0 auto",
                 aspectRatio: "1/1",
                 overflow: "hidden",
               }}
             >
-              <Image src={src} alt={`Instagram ${i + 1}`} fill sizes="(max-width: 768px) 50vw, 20vw" style={{ objectFit: "cover" }} className="ig-img" />
+              <Image 
+                src={src} 
+                alt={`Instagram ${i + 1}`} 
+                fill 
+                sizes="(max-width: 480px) 70vw, (max-width: 768px) 40vw, (max-width: 1024px) 25vw, 16vw" 
+                style={{ objectFit: "cover" }} 
+                className="ig-img" 
+              />
               <div className="ig-overlay" />
             </a>
           ))}
@@ -95,8 +102,8 @@ export default function InstagramStrip() {
       <style jsx>{`
         .ig-marquee-track {
           display: flex;
-          width: max-content;
-          animation: marquee 35s linear infinite;
+          width: 200%; /* 12 items, 6 per screen = 200% of container */
+          animation: marquee 30s linear infinite;
         }
 
         /* Pause animation on hover for a premium interactive feel */
@@ -106,11 +113,11 @@ export default function InstagramStrip() {
 
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); } /* Translate exactly half the track (which is the original 6 items) */
+          100% { transform: translateX(-50%); } /* Slide exactly half (6 items) */
         }
         
         .ig-photo-link {
-          width: calc(100vw / 6);
+          width: calc(100% / 12); /* 12 items in the 200% width track */
         }
 
         .ig-img {
@@ -139,20 +146,20 @@ export default function InstagramStrip() {
         }
 
         @media (max-width: 1024px) {
-          .ig-photo-link {
-            width: calc(100vw / 4);
+          .ig-marquee-track {
+            width: 300%; /* 12 items, 4 per screen = 300% */
           }
         }
 
         @media (max-width: 768px) {
-          .ig-photo-link {
-            width: calc(100vw / 2.5); /* Show partial next image */
+          .ig-marquee-track {
+            width: 480%; /* 12 items, 2.5 per screen = 480% */
           }
         }
         
         @media (max-width: 480px) {
-          .ig-photo-link {
-            width: calc(100vw / 1.5); /* Mobile layout */
+          .ig-marquee-track {
+            width: 800%; /* 12 items, 1.5 per screen = 800% */
           }
         }
       `}</style>
