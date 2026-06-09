@@ -178,10 +178,7 @@ export default function HeroSection() {
     };
   }, []);
 
-  const scrollToEnquiry = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
-  
+
   const scrollToFilms = () => {
     document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -310,7 +307,7 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-cta-group">
-          <LiquidButton onClick={scrollToEnquiry} className="btn-primary">
+          <LiquidButton href="/#contact" className="btn-primary">
             Book a Consultation
           </LiquidButton>
         </div>
