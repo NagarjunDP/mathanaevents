@@ -2,12 +2,12 @@
 import Image from "next/image";
 
 const photos = [
-  "/gallery/photo-01.jpg",
-  "/gallery/photo-02.jpg",
-  "/gallery/photo-03.jpg",
-  "/gallery/photo-04.jpg",
-  "/gallery/photo-05.jpg",
-  "/gallery/photo-06.jpg",
+  "/pic1.jpeg",
+  "/pic2.jpeg",
+  "/pic3.jpeg",
+  "/pic4.jpeg",
+  "/pic5.jpeg",
+  "/pic6.jpeg",
 ];
 
 export default function InstagramStrip() {
@@ -33,35 +33,35 @@ export default function InstagramStrip() {
         </p>
       </div>
 
+      {/* Marquee Container */}
       <div
-        className="ig-strip"
         style={{
           display: "flex",
           width: "100%",
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
+          overflow: "hidden", // Hide the scrollbar and overflowing content
         }}
       >
-        {photos.map((src, i) => (
-          <a
-            key={i}
-            href="https://instagram.com/mathanaevents"
-            target="_blank"
-            rel="noreferrer"
-            className="ig-photo-link"
-            style={{
-              position: "relative",
-              flexShrink: 0,
-              width: "calc(100% / 6)", // 6 slots desktop
-              aspectRatio: "1/1",
-              overflow: "hidden",
-              scrollSnapAlign: "start",
-            }}
-          >
-            <Image src={src} alt={`Instagram ${i + 1}`} fill style={{ objectFit: "cover" }} className="ig-img" />
-            <div className="ig-overlay" />
-          </a>
-        ))}
+        {/* The Track that animates */}
+        <div className="ig-marquee-track">
+          {[...photos, ...photos].map((src, i) => (
+            <a
+              key={i}
+              href="https://instagram.com/mathanaevents"
+              target="_blank"
+              rel="noreferrer"
+              className="ig-photo-link"
+              style={{
+                position: "relative",
+                flexShrink: 0,
+                aspectRatio: "1/1",
+                overflow: "hidden",
+              }}
+            >
+              <Image src={src} alt={`Instagram ${i + 1}`} fill sizes="(max-width: 768px) 50vw, 20vw" style={{ objectFit: "cover" }} className="ig-img" />
+              <div className="ig-overlay" />
+            </a>
+          ))}
+        </div>
       </div>
 
       <div style={{ marginTop: "48px" }}>
@@ -93,19 +93,35 @@ export default function InstagramStrip() {
       </div>
 
       <style jsx>{`
-        .ig-strip::-webkit-scrollbar {
-          display: none; /* hide scrollbar for clean look */
+        .ig-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee 35s linear infinite;
+        }
+
+        /* Pause animation on hover for a premium interactive feel */
+        .ig-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); } /* Translate exactly half the track (which is the original 6 items) */
         }
         
+        .ig-photo-link {
+          width: calc(100vw / 6);
+        }
+
         .ig-img {
-          transition: transform 400ms ease;
+          transition: transform 600ms ease;
         }
 
         .ig-overlay {
           position: absolute;
           inset: 0;
           background: rgba(201,168,76,0);
-          transition: background 400ms ease;
+          transition: background 600ms ease;
           z-index: 1;
         }
 
@@ -124,19 +140,19 @@ export default function InstagramStrip() {
 
         @media (max-width: 1024px) {
           .ig-photo-link {
-            width: calc(100% / 4) !important;
+            width: calc(100vw / 4);
           }
         }
 
         @media (max-width: 768px) {
           .ig-photo-link {
-            width: calc(100% / 2) !important;
+            width: calc(100vw / 2.5); /* Show partial next image */
           }
         }
         
         @media (max-width: 480px) {
           .ig-photo-link {
-            width: 80% !important; /* show part of next image to indicate scroll */
+            width: calc(100vw / 1.5); /* Mobile layout */
           }
         }
       `}</style>
