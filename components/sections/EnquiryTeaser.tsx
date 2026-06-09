@@ -95,7 +95,7 @@ export default function EnquiryTeaser() {
                   </div>
                   <div className="input-group" style={{ flex: 1 }}>
                     <label>Mobile Number</label>
-                    <input type="tel" required placeholder="+91 98765 43210" />
+                    <input type="tel" required placeholder="+91 63634 78453" />
                   </div>
                 </div>
 
@@ -147,11 +147,11 @@ export default function EnquiryTeaser() {
             <div style={{ borderLeft: "1px solid rgba(43, 40, 36, 0.1)", paddingLeft: "48px", display: "flex", flexDirection: "column", gap: "48px" }} className="sidebar-inner">
               <div>
                 <p className="sidebar-label">Write to the Atelier</p>
-                <a href="mailto:hello@mathanaevents.com" className="sidebar-link">hello@mathanaevents.com</a>
+                <a href="mailto:mathanaevents@gmail.com" className="sidebar-link">mathanaevents@gmail.com</a>
               </div>
               <div>
                 <p className="sidebar-label">Direct Line</p>
-                <a href="tel:+919876543210" className="sidebar-link">+91 98765 43210</a>
+                <a href="tel:+916363478453" className="sidebar-link">+91 63634 78453</a>
               </div>
               <div>
                 <p className="sidebar-label">The Studio</p>

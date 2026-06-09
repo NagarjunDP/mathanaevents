@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
 
   return (
     <LiquidButton
-      href="https://wa.me/919876543210?text=Hi%20Mathana%20Events%2C%20I'd%20like%20to%20enquire%20about%20your%20photography%20services."
+      href="https://wa.me/916363478453?text=Hi%20Mathana%20Events%2C%20I'd%20like%20to%20enquire%20about%20your%20photography%20services."
       isExternal={true}
       className={`whatsapp-float ${isTriggered ? "visible" : ""}`}
     >

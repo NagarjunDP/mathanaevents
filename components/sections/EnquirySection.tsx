@@ -145,7 +145,7 @@ export default function EnquirySection() {
                 <input id="field-name" type="text" className={`form-input ${errors.name ? "error" : ""}`} placeholder="Your full name" value={form.name} onChange={set("name")} autoComplete="name" />
               </FormField>
               <FormField label="Mobile Number" id="field-mobile" error={errors.mobile}>
-                <input id="field-mobile" type="tel" className={`form-input ${errors.mobile ? "error" : ""}`} placeholder="+91 98765 43210" value={form.mobile} onChange={set("mobile")} autoComplete="tel" />
+                <input id="field-mobile" type="tel" className={`form-input ${errors.mobile ? "error" : ""}`} placeholder="+91 63634 78453" value={form.mobile} onChange={set("mobile")} autoComplete="tel" />
               </FormField>
             </div>
 
@@ -196,7 +196,7 @@ export default function EnquirySection() {
             {/* WhatsApp */}
             <div style={{ textAlign: "center", marginTop: "24px" }}>
               <a
-                href="https://wa.me/919876543210?text=Hi%20Mathana%20Events%2C%20I'd%20like%20to%20enquire%20about%20your%20photography%20services."
+                href="https://wa.me/916363478453?text=Hi%20Mathana%20Events%2C%20I'd%20like%20to%20enquire%20about%20your%20photography%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 id="whatsapp-cta"
