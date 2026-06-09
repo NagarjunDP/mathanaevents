@@ -2,6 +2,12 @@
 import Image from "next/image";
 
 const photos = [
+  "/p1.jpeg",
+  "/p2.jpeg",
+  "/p3.jpeg",
+  "/p4.jpeg",
+  "/p5.jpeg",
+  "/p6.jpeg",
   "/pic1.jpeg",
   "/pic2.jpeg",
   "/pic3.jpeg",
