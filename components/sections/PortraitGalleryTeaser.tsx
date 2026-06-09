@@ -7,11 +7,11 @@ import LiquidButton from "@/components/ui/LiquidButton";
 import { useRouter } from "next/navigation";
 
 const teaserPhotos = [
-  { id: 1, src: "/gallery/photo-01.jpg", alt: "Mathana Portrait 1" },
-  { id: 2, src: "/gallery/photo-02.jpg", alt: "Mathana Portrait 2" },
-  { id: 3, src: "/gallery/photo-03.jpg", alt: "Mathana Portrait 3" },
-  { id: 4, src: "/gallery/photo-04.jpg", alt: "Mathana Portrait 4" },
-  { id: 5, src: "/gallery/photo-05.jpg", alt: "Mathana Portrait 5" },
+  { id: 1, src: "/pic1.jpeg", alt: "Mathana Portrait 1" },
+  { id: 2, src: "/pic11.jpeg", alt: "Mathana Portrait 2" },
+  { id: 3, src: "/pic3.jpeg", alt: "Mathana Portrait 3" },
+  { id: 4, src: "/pic2.jpeg", alt: "Mathana Portrait 4" },
+  { id: 5, src: "/pic10.jpeg", alt: "Mathana Portrait 5" },
 ];
 
 export default function PortraitGalleryTeaser() {
