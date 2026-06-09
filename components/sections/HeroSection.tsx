@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { useTextMagnet } from "@/hooks/useTextMagnet";
-import { SplitText } from "gsap-trial/dist/SplitText";
 import Preloader from "@/components/ui/Preloader";
 import LiquidButton from "@/components/ui/LiquidButton";
 
