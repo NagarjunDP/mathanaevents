@@ -5,7 +5,6 @@ import Image from "next/image";
 const navLinks = [
   { label: "FILMS", href: "/films" },
   { label: "PHOTOGRAPHY", href: "/photography" },
-  { label: "VIDEOGRAPHY", href: "/videography" },
   { label: "ATELIER", href: "/atelier" },
   { label: "CONTACT", href: "/#contact" },
 ];
@@ -23,10 +22,10 @@ export default function Footer() {
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 48px" }} className="footer-inner">
-        
+
         {/* Main Columns Stacked and Centered */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "56px", marginBottom: "80px", textAlign: "center" }} className="footer-grid">
-          
+
           {/* Top: Logo & Tagline */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div style={{ position: "relative", height: "80px", width: "80px", marginBottom: "32px" }}>

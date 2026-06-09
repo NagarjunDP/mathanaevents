@@ -218,38 +218,35 @@ export default function AtelierPage() {
 
       </section>
 
-      {/* ── THE COLLECTIVE ── */}
-      <section style={{ padding: "0 48px 120px", textAlign: "center" }}>
-        <p className="section-label" style={{ marginBottom: "64px" }}>The Collective</p>
-        <div style={{ display: "flex", justifyContent: "center", gap: "32px", flexWrap: "wrap" }}>
-          {/* Team Member 1 */}
-          <div style={{ width: "280px" }}>
-            <div style={{ position: "relative", aspectRatio: "3/4", marginBottom: "24px" }}>
-              <Image src="/gallery/photo-04.jpg" alt="Team Member" fill style={{ objectFit: "cover", filter: "grayscale(100%)" }} />
-            </div>
-            <h3 style={{ fontFamily: "'Cormorant Garamond'", fontStyle: "italic", fontSize: "28px", color: "var(--cream)", marginBottom: "8px" }}>Rahul S.</h3>
-            <p style={{ fontFamily: "'Raleway'", fontSize: "10px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Lead Editor</p>
-          </div>
-          {/* Team Member 2 */}
-          <div style={{ width: "280px" }}>
-            <div style={{ position: "relative", aspectRatio: "3/4", marginBottom: "24px" }}>
-              <Image src="/gallery/photo-05.jpg" alt="Team Member" fill style={{ objectFit: "cover", filter: "grayscale(100%)" }} />
-            </div>
-            <h3 style={{ fontFamily: "'Cormorant Garamond'", fontStyle: "italic", fontSize: "28px", color: "var(--cream)", marginBottom: "8px" }}>Vikram K.</h3>
-            <p style={{ fontFamily: "'Raleway'", fontSize: "10px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Senior Photographer</p>
-          </div>
-        </div>
-      </section>
-
       {/* ── PRESS / MEDIA ── */}
       <section style={{ padding: "0 48px 120px", textAlign: "center" }}>
         <p className="section-label" style={{ marginBottom: "24px" }}>As Seen In</p>
-        <a href="#" style={{ fontFamily: "'Cormorant Garamond'", fontStyle: "italic", fontSize: "36px", color: "var(--cream)", textDecoration: "underline", textDecorationColor: "var(--gold)" }}>
+        <a 
+          href="#" 
+          className="press-link"
+          style={{ 
+            fontFamily: "'Cormorant Garamond'", 
+            fontStyle: "italic", 
+            fontSize: "48px", 
+            color: "var(--gold)", 
+            textDecoration: "none", 
+            textShadow: "0 0 20px rgba(201,168,76,0.6)",
+            transition: "all 0.4s ease",
+            display: "inline-block"
+          }}
+        >
           The Hindu
         </a>
       </section>
 
       <style jsx>{`
+        @media (hover: hover) {
+          .press-link:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 30px rgba(201,168,76,1) !important;
+            filter: brightness(1.2);
+          }
+        }
         @media (max-width: 768px) {
           .fade-up-block {
             grid-template-columns: 1fr !important;
