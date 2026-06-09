@@ -371,7 +371,7 @@ export default function EnquiryTeaser() {
           
           /* Centralize and simplify form on mobile */
           .contact-form {
-            align-items: center !important;
+            align-items: stretch !important;
             text-align: center !important;
           }
           
