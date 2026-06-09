@@ -9,9 +9,9 @@ const services = [
   { num: "01", title: "Wedding Films", img: "/gallery/photo-01.jpg", href: "/films" },
   { num: "02", title: "Candid Photography", img: "/gallery/photo-02.jpg", href: "/photography" },
   { num: "03", title: "Pre-Wedding", img: "/gallery/photo-03.jpg", href: "/films" },
-  { num: "04", title: "Housewarming & Simantha", img: "/gallery/photo-04.jpg", href: "/photography" },
-  { num: "05", title: "Birthday Films", img: "/gallery/photo-05.jpg", href: "/films" },
-  { num: "06", title: "Cocktail & Reception", img: "/gallery/photo-06.jpg", href: "/photography" },
+  { num: "04", title: "Housewarming & Simantha", img: "/gallery/housewarming.png", href: "/photography" },
+  { num: "05", title: "Birthday Films", img: "/gallery/birthday.png", href: "/films" },
+  { num: "06", title: "Cocktail & Reception", img: "/gallery/cocktail.png", href: "/photography" },
 ];
 
 export default function CelebrationsGrid() {
