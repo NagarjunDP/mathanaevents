@@ -235,7 +235,7 @@ export default function FeaturedFilm() {
             href="/films"
             className="btn-primary"
           >
-            View All Films
+            <span style={{ color: "#ffffff" }}>View All Films</span>
           </LiquidButton>
         </div>
       </div>

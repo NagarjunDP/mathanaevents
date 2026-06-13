@@ -1,7 +1,7 @@
 "use client";
 
 export default function ServicesMarquee() {
-  const text = "WEDDING FILMS \u00B7 CANDID PHOTOGRAPHY \u00B7 PRE-WEDDING \u00B7 DESTINATION WEDDINGS \u00B7 HOUSEWARMING \u00B7 SIMANTHA \u00B7 BIRTHDAY FILMS \u00B7 COCKTAIL PARTIES \u00B7 ";
+  const text = "WEDDING FILMS \u00B7 CANDID PHOTOGRAPHY \u00B7 PRE-WEDDING \u00B7 DESTINATION WEDDINGS \u00B7 CUSTOMIZABLE WEDDINGS \u00B7 HOUSEWARMING \u00B7 SIMANTHA \u00B7 BIRTHDAY FILMS \u00B7 COCKTAIL PARTIES \u00B7 ";
   
   // We duplicate the text enough times to fill the screen twice to loop smoothly
   const repeatedText = Array(10).fill(text).join("");
@@ -53,7 +53,7 @@ export default function ServicesMarquee() {
         .marquee-content {
           display: flex;
           width: max-content;
-          animation: marquee 40s linear infinite;
+          animation: marquee 80s linear infinite;
         }
         
         .marquee-content:hover {
@@ -71,7 +71,7 @@ export default function ServicesMarquee() {
 
         @media (max-width: 768px) {
           .marquee-content {
-            animation-duration: 60s;
+            animation-duration: 120s;
           }
         }
       `}</style>

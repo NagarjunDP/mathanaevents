@@ -5,6 +5,7 @@ import Image from "next/image";
 const navLinks = [
   { label: "FILMS", href: "/films" },
   { label: "PHOTOGRAPHY", href: "/photography" },
+  { label: "SERVICES", href: "/#services" },
   { label: "ATELIER", href: "/atelier" },
   { label: "CONTACT", href: "/#contact" },
 ];
@@ -92,6 +93,16 @@ export default function Footer() {
               </svg>
             </a>
           </div>
+
+          {/* Careers / Hiring */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", marginTop: "16px" }}>
+            <p style={{ fontFamily: "'Raleway', sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "var(--cream-dim)", textTransform: "uppercase" }}>
+              Work With Us
+            </p>
+            <a href="mailto:mathanaevents@gmail.com" className="footer-link" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "22px", color: "var(--gold)", textDecoration: "none" }}>
+              mathanaevents@gmail.com
+            </a>
+          </div>
         </div>
 
         {/* Bottom Bar */}
@@ -108,7 +119,7 @@ export default function Footer() {
           className="footer-bottom"
         >
           <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 200, fontSize: "10px", color: "var(--cream-dim)", letterSpacing: "0.1em" }}>
-            &copy; 2025 Mathana Events &middot; All Rights Reserved
+            &copy; 2026 Mathana Events &middot; All Rights Reserved
           </span>
           <span style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 300, fontSize: "11px", color: "var(--cream-dim)", letterSpacing: "0.1em" }}>
             Designed & Developed by <a href="https://webibi.tech" target="_blank" rel="noreferrer" className="webibi-link" style={{ color: "var(--gold)", fontWeight: 600, textDecoration: "none", letterSpacing: "0.15em", textShadow: "0 0 12px rgba(201,168,76,0.5)", transition: "all 0.3s ease" }}>WEBIBI.TECH</a>

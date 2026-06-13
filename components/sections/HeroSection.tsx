@@ -9,6 +9,7 @@ export default function HeroSection() {
   const [isAbbreviated, setIsAbbreviated] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [vimeoId, setVimeoId] = useState("1199405546");
+  const [bgImage, setBgImage] = useState("/pic1.jpeg");
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -26,6 +27,11 @@ export default function HeroSection() {
     const heroVideos = ["1199405546", "1199519472", "1199405543"];
     const randomVideo = heroVideos[Math.floor(Math.random() * heroVideos.length)];
     setVimeoId(randomVideo);
+
+    // Randomize background image
+    const heroBgImages = ["/pic5.jpeg", "/pic2.jpeg", "/pic1.jpeg", "/p1.jpeg", "/pic8.jpeg", "/pic9.jpeg"];
+    const randomImg = heroBgImages[Math.floor(Math.random() * heroBgImages.length)];
+    setBgImage(randomImg);
 
     // Check preloader state
     const isShown = localStorage.getItem("preloader_shown");
@@ -208,7 +214,7 @@ export default function HeroSection() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "url('/p1.jpeg')",
+            backgroundImage: `url('${bgImage}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             zIndex: 0,
@@ -309,7 +315,7 @@ export default function HeroSection() {
 
         <div className="hero-cta-group">
           <LiquidButton href="/#contact" className="btn-primary">
-            Book a Consultation
+            <span style={{ color: "#ffffff" }}>Book a Consultation</span>
           </LiquidButton>
         </div>
       </div>
@@ -355,7 +361,7 @@ export default function HeroSection() {
         .hero-gradient {
           position: absolute;
           inset: 0;
-          background: linear-gradient(165deg, rgba(6,6,6,0.55) 0%, rgba(6,6,6,0.3) 50%, rgba(6,6,6,0.7) 100%);
+          background: linear-gradient(165deg, rgba(6,6,6,0.55) 0%, rgba(6,6,6,0.3) 50%, rgba(6,6,6,0.85) 100%);
           z-index: 2;
           pointer-events: none;
         }
@@ -389,7 +395,7 @@ export default function HeroSection() {
           font-weight: 200;
           font-size: 9px;
           letter-spacing: 0.55em;
-          color: var(--gold);
+          color: #ffffff !important;
           text-transform: uppercase;
         }
 
@@ -399,7 +405,7 @@ export default function HeroSection() {
           font-style: italic;
           font-weight: 300;
           font-size: clamp(44px, 9vw, 108px);
-          color: var(--cream);
+          color: #ffffff !important;
           line-height: 1.25;
           margin: 0 0 24px 0;
           text-align: left;
@@ -422,7 +428,7 @@ export default function HeroSection() {
           font-weight: 200;
           font-size: 11px;
           letter-spacing: 0.3em;
-          color: rgba(242, 237, 228, 0.6);
+          color: #ffffff !important;
           line-height: 1.8;
           margin-bottom: 32px;
           text-align: left;
@@ -436,6 +442,11 @@ export default function HeroSection() {
           display: flex;
           align-items: center;
           gap: 16px;
+        }
+        
+        .hero-cta-group .btn-primary {
+          color: #ffffff !important;
+          border-color: rgba(255, 255, 255, 0.4) !important;
         }
 
 
@@ -482,7 +493,7 @@ export default function HeroSection() {
             letter-spacing: 0.25em;
             line-height: 1.9;
             text-align: center;
-            color: rgba(242, 237, 228, 0.9); /* Highlight more on mobile */
+            color: #ffffff !important;
           }
           .hero-cta-group {
             flex-direction: column;

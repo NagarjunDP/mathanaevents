@@ -21,18 +21,18 @@ export default function InstagramStrip() {
     <section
       style={{
         padding: "120px 0",
-        background: "var(--black)",
+        background: "var(--cream)",
         textAlign: "center",
       }}
     >
       <div style={{ padding: "0 24px", marginBottom: "48px" }}>
-        <p className="section-label" style={{ marginBottom: "16px" }}>FOLLOW THE JOURNEY</p>
+        <p className="section-label" style={{ marginBottom: "16px", color: "var(--gold-dim)" }}>FOLLOW THE JOURNEY</p>
         <p
           style={{
             fontFamily: "'Raleway', sans-serif",
-            fontWeight: 300,
+            fontWeight: 400,
             fontSize: "14px",
-            color: "var(--cream-dim)",
+            color: "rgba(6, 6, 6, 0.6)",
           }}
         >
           @mathanaevents &middot; 7,450 Followers
@@ -82,7 +82,7 @@ export default function InstagramStrip() {
           href="https://instagram.com/mathanaevents"
           target="_blank"
           rel="noreferrer"
-          className="btn-gold-pill"
+          className="btn-gold-pill ig-btn"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -91,10 +91,10 @@ export default function InstagramStrip() {
             height: "44px",
             borderRadius: "100px",
             background: "transparent",
-            border: "1px solid var(--gold)",
-            color: "var(--gold)",
+            border: "1px solid var(--gold-dim)",
+            color: "var(--gold-dim)",
             fontFamily: "'Raleway', sans-serif",
-            fontWeight: 200,
+            fontWeight: 400,
             fontSize: "10px",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
@@ -108,7 +108,7 @@ export default function InstagramStrip() {
       <style jsx>{`
         .ig-marquee-track {
           display: flex;
-          width: 200%; /* 12 items, 6 per screen = 200% of container */
+          width: max-content;
           animation: marquee 30s linear infinite;
         }
 
@@ -119,11 +119,12 @@ export default function InstagramStrip() {
 
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); } /* Slide exactly half (6 items) */
+          100% { transform: translateX(-50%); } /* Slide exactly half (the first set of photos) */
         }
         
         .ig-photo-link {
-          width: calc(100% / 12); /* 12 items in the 200% width track */
+          width: 25vw;
+          flex-shrink: 0;
         }
 
         .ig-img {
@@ -133,7 +134,7 @@ export default function InstagramStrip() {
         .ig-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(201,168,76,0);
+          background: rgba(6, 6, 6, 0);
           transition: background 600ms ease;
           z-index: 1;
         }
@@ -143,29 +144,29 @@ export default function InstagramStrip() {
             transform: scale(1.05);
           }
           .ig-photo-link:hover .ig-overlay {
-            background: rgba(201,168,76,0.15);
+            background: rgba(6, 6, 6, 0.15);
           }
-          .btn-gold-pill:hover {
-            background: var(--gold) !important;
-            color: var(--black) !important;
+          .ig-btn:hover {
+            background: var(--gold-dim) !important;
+            color: var(--cream) !important;
           }
         }
 
         @media (max-width: 1024px) {
-          .ig-marquee-track {
-            width: 300%; /* 12 items, 4 per screen = 300% */
+          .ig-photo-link {
+            width: 33.333vw;
           }
         }
 
         @media (max-width: 768px) {
-          .ig-marquee-track {
-            width: 480%; /* 12 items, 2.5 per screen = 480% */
+          .ig-photo-link {
+            width: 50vw;
           }
         }
         
         @media (max-width: 480px) {
-          .ig-marquee-track {
-            width: 800%; /* 12 items, 1.5 per screen = 800% */
+          .ig-photo-link {
+            width: 85vw;
           }
         }
       `}</style>
