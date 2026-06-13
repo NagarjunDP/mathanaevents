@@ -12,13 +12,13 @@ export default function ServicesMarquee() {
       style={{
         width: "100%",
         height: "48px",
-        background: "#1A1400",
+        background: "#F2EDE4",
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
         position: "relative",
-        borderTop: "1px solid rgba(201,168,76,0.2)",
-        borderBottom: "1px solid rgba(201,168,76,0.2)",
+        borderTop: "1px solid rgba(6,6,6,0.1)",
+        borderBottom: "1px solid rgba(6,6,6,0.1)",
       }}
     >
       <div className="marquee-content">
@@ -28,7 +28,7 @@ export default function ServicesMarquee() {
             fontWeight: 200,
             fontSize: "11px",
             letterSpacing: "0.3em",
-            color: "var(--black)",
+            color: "#060606",
             whiteSpace: "nowrap",
             paddingRight: "20px", // slight buffer
           }}
@@ -41,7 +41,7 @@ export default function ServicesMarquee() {
             fontWeight: 200,
             fontSize: "11px",
             letterSpacing: "0.3em",
-            color: "var(--black)",
+            color: "#060606",
             whiteSpace: "nowrap",
           }}
         >

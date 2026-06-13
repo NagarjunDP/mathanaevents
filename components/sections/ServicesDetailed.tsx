@@ -4,70 +4,44 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 const detailedServices = [
-  {
-    num: "01",
-    title: "Custom Weddings",
-    desc: "Bespoke, multi-day coverage engineered for visionary celebrations. We architect a specialized cinematic and photographic approach to match the profound scale and intimacy of your grandest event.",
-  },
-  {
-    num: "02",
-    title: "Destination Worldwide",
-    desc: "From historic European chateaus to untouched tropical coastlines, we travel seamlessly. Our discrete, high-end production adapts flawlessly to any landscape, preserving your extraordinary destination.",
-  },
-  {
-    num: "03",
-    title: "Pre-Wedding Shoots",
-    desc: "A highly stylized, cinematic prologue. We collaborate to conceptualize breathtaking narratives in avant-garde locations, capturing the raw, magnetic chemistry of your relationship before the vows.",
-  },
-  {
-    num: "04",
-    title: "House Ceremony",
-    desc: "The quiet sanctity of a Grihapravesha or family Puja demands profound respect. We utilize an invisible, documentary ethos to honor these deeply rooted spiritual traditions within your ancestral spaces.",
-  },
-  {
-    num: "05",
-    title: "Cocktail Party",
-    desc: "When formality gives way to pure electric energy. We thrive in low-light, high-style environments, capturing the clinking crystal, the designer silhouettes, and the uninhibited, joyous candids of the night.",
-  },
-  {
-    num: "06",
-    title: "Baby Shower",
-    desc: "An elegant, ethereal documentation of new life. We focus on soft light and tender interactions, preserving the maternal glow and the quiet anticipation of your closest inner circle.",
-  },
-  {
-    num: "07",
-    title: "Birthday Party",
-    desc: "Whether a monumental milestone gala or an exclusive private dinner, we document the atmosphere and the laughter. A vibrant, high-fidelity visual capsule of a night worth remembering.",
-  },
+  { title: "Custom Weddings", vimeoId: "1199405546" },
+  { title: "Destination Weddings", vimeoId: "1199519472" },
+  { title: "Housewarming Ceremonies", vimeoId: "1199737517" },
+  { title: "Pre-Wedding Shoots", vimeoId: "1199506019" },
+  { title: "Simantha (Baby Shower)", vimeoId: "1199516733" },
+  { title: "Birthday Films", vimeoId: "1199508052" },
+  { title: "Cocktail Parties", vimeoId: "1199515448" },
 ];
 
 export default function ServicesDetailed() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Elegant line-by-line reveal for the list items
-      gsap.utils.toArray<HTMLElement>(".editorial-row").forEach((row) => {
-        gsap.fromTo(
-          row,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: row,
-              start: "top 90%",
-            },
-          }
-        );
-      });
-    }, containerRef);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    return () => ctx.revert();
+    if (!prefersReducedMotion && gridRef.current) {
+      const cards = gridRef.current.querySelectorAll(".service-video-card");
+
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+          },
+        }
+      );
+    }
   }, []);
 
   return (
@@ -75,180 +49,157 @@ export default function ServicesDetailed() {
       id="services"
       ref={containerRef}
       style={{
-        padding: "180px 0",
+        padding: "120px 0",
         background: "#F2EDE4",
         position: "relative",
-        overflow: "hidden",
       }}
-      className="editorial-services-section"
     >
-      <div style={{ padding: "0 48px", maxWidth: "1600px", margin: "0 auto" }}>
+      <div style={{ padding: "0 24px", maxWidth: "1600px", margin: "0 auto" }}>
         
         {/* Header */}
-        <div style={{ marginBottom: "120px" }} className="editorial-header">
-          <div>
-            <h2
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontWeight: 300,
-                fontSize: "clamp(48px, 8vw, 100px)",
-                color: "#060606",
-                lineHeight: 0.9,
-                margin: 0,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Services from <br className="mobile-break" /><span style={{ fontStyle: "italic", color: "#8A6E2F" }}>Mathana Events</span>
-            </h2>
-          </div>
+        <div style={{ marginBottom: "64px", textAlign: "center" }}>
+          <h2
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 300,
+              fontSize: "clamp(40px, 6vw, 80px)",
+              color: "#060606",
+              lineHeight: 1,
+              margin: 0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Services from <br className="mobile-break" />
+            <span style={{ fontStyle: "italic", color: "#8A6E2F" }}>Mathana Events</span>
+          </h2>
         </div>
 
-        {/* Minimalist Typographic List */}
-        <div className="editorial-list">
+        {/* Video Grid */}
+        <div ref={gridRef} className="service-video-grid">
           {detailedServices.map((svc, i) => (
-            <div key={svc.num} className="editorial-row">
-              <div className="row-col row-num">
-                <span>[ {svc.num} ]</span>
+            <div key={i} className="service-video-card">
+              <div className="iframe-wrapper">
+                <iframe
+                  src={`https://player.vimeo.com/video/${svc.vimeoId}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&app_id=58479`}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  title={svc.title}
+                  className="vimeo-iframe"
+                />
               </div>
-              
-              <div className="row-col row-title-wrap">
-                <h3 className="row-title">
-                  {svc.title}
-                </h3>
-              </div>
-              
-              <div className="row-col row-desc-wrap">
-                <p className="row-desc">
-                  {svc.desc}
-                </p>
+              <div className="video-overlay" />
+              <div className="text-wrapper">
+                <h3 className="service-title">{svc.title}</h3>
               </div>
             </div>
           ))}
         </div>
-        
+
       </div>
 
       <style jsx>{`
-        .editorial-list {
-          display: flex;
-          flex-direction: column;
-          border-top: 1px solid rgba(6, 6, 6, 0.15);
+        .service-video-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
         }
 
-        .editorial-row {
-          display: flex;
-          align-items: center;
-          padding: 80px 0;
-          border-bottom: 1px solid rgba(6, 6, 6, 0.15);
-          transition: background 0.6s ease;
+        .service-video-card {
           position: relative;
-          cursor: default;
+          aspect-ratio: 16/9;
+          overflow: hidden;
+          background: #000;
+          cursor: pointer;
+          border-radius: 4px;
         }
 
-        .row-num {
-          width: 15%;
-          font-family: 'Raleway', sans-serif;
-          font-weight: 300;
-          font-size: 14px;
-          color: rgba(6, 6, 6, 0.4);
-          letter-spacing: 0.2em;
-          transition: color 0.6s ease;
+        /* Span the last item across the remaining columns if it's orphaned, or just let it be aligned. 
+           To make the 7th item look intentional, we can make it span across columns on desktop. */
+        .service-video-card:nth-child(7) {
+          grid-column: span 3;
         }
 
-        .row-title-wrap {
-          width: 50%;
+        .iframe-wrapper {
+          position: absolute;
+          inset: 0;
+          pointer-events: none; /* Crucial so it doesn't intercept clicks/hovers */
         }
 
-        .row-title {
+        .vimeo-iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+          transform: scale(1.05); /* Slight scale to hide Vimeo borders/edges */
+          transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(6, 6, 6, 0.9) 0%, rgba(6, 6, 6, 0.2) 50%, rgba(6, 6, 6, 0) 100%);
+          transition: background 0.5s ease;
+          pointer-events: none;
+        }
+
+        .text-wrapper {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 32px;
+          pointer-events: none;
+        }
+
+        .service-title {
           font-family: 'Cormorant Garamond', serif;
           font-style: italic;
           font-weight: 400;
-          font-size: clamp(40px, 5.5vw, 84px);
-          color: #060606;
-          line-height: 1;
+          font-size: clamp(24px, 3vw, 42px);
+          color: #ffffff;
           margin: 0;
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s ease;
-          transform-origin: left center;
+          line-height: 1.1;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .row-desc-wrap {
-          width: 35%;
-          padding-left: 40px;
+        .mobile-break {
+          display: none;
         }
 
-        .row-desc {
-          font-family: 'Raleway', sans-serif;
-          font-weight: 300;
-          font-size: 15px;
-          line-height: 1.7;
-          color: rgba(6, 6, 6, 0.6);
-          margin: 0;
-          max-width: 420px;
-          transition: color 0.6s ease;
-        }
-
-        /* Hover Interactions - Pure Luxury Editorial Style */
         @media (hover: hover) {
-          .editorial-row:hover .row-num {
-            color: #8A6E2F;
+          .service-video-card:hover .vimeo-iframe {
+            transform: scale(1.15);
           }
-          .editorial-row:hover .row-title {
-            transform: translateX(30px);
-            color: #8A6E2F;
+          .service-video-card:hover .video-overlay {
+            background: linear-gradient(to top, rgba(6, 6, 6, 0.8) 0%, rgba(6, 6, 6, 0.4) 50%, rgba(6, 6, 6, 0.2) 100%);
           }
-          .editorial-row:hover .row-desc {
-            color: #060606;
-          }
-        }
-
-        /* Responsive Layouts */
-        @media (max-width: 1200px) {
-          .row-title {
-            font-size: 56px;
+          .service-video-card:hover .service-title {
+            transform: translateY(-8px);
           }
         }
 
-        @media (max-width: 900px) {
-          .editorial-header {
-            margin-bottom: 80px !important;
+        @media (max-width: 1024px) {
+          .service-video-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
-          .mobile-break {
-            display: block;
-          }
-          .editorial-row {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 48px 0;
-            gap: 24px;
-          }
-          .row-num {
-            width: 100%;
-          }
-          .row-title-wrap {
-            width: 100%;
-          }
-          .row-title {
-            font-size: 48px;
-            font-style: normal;
-          }
-          .row-desc-wrap {
-            width: 100%;
-            padding-left: 0;
-          }
-          .row-desc {
-            max-width: 100%;
+          .service-video-card:nth-child(7) {
+            grid-column: span 2;
           }
         }
 
         @media (max-width: 768px) {
-          .editorial-services-section {
-            padding: 100px 0 !important;
+          .service-video-grid {
+            grid-template-columns: 1fr;
           }
-          .editorial-services-section > div {
-            padding: 0 24px !important;
+          .service-video-card:nth-child(7) {
+            grid-column: span 1;
           }
-          .row-title {
-            font-size: 40px;
+          .text-wrapper {
+            padding: 24px;
+          }
+          .mobile-break {
+            display: block;
           }
         }
       `}</style>

@@ -64,7 +64,7 @@ export default function CelebrationsGrid() {
       ref={containerRef}
       style={{
         padding: "120px 24px",
-        background: "var(--black)",
+        background: "#F2EDE4",
         position: "relative",
       }}
       className="celebrations-wrapper"
@@ -80,7 +80,7 @@ export default function CelebrationsGrid() {
               fontStyle: "italic",
               fontWeight: 300,
               fontSize: "clamp(40px, 6vw, 72px)",
-              color: "var(--cream)",
+              color: "#060606",
               lineHeight: 1.15,
             }}
           >

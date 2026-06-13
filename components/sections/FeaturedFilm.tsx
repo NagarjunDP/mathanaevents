@@ -77,7 +77,7 @@ export default function FeaturedFilm() {
       id="featured-film"
       ref={containerRef}
       style={{
-        background: "#0A0806",
+        background: "#F2EDE4",
         padding: "clamp(80px, 10vw, 140px) 0",
         position: "relative",
         overflow: "hidden",
@@ -120,7 +120,7 @@ export default function FeaturedFilm() {
             fontStyle: "italic",
             fontWeight: 300,
             fontSize: "clamp(32px, 5vw, 56px)",
-            color: "#F2EDE4",
+            color: "#060606",
             lineHeight: 1.1,
             textAlign: "center",
             margin: 0,
@@ -227,7 +227,7 @@ export default function FeaturedFilm() {
               fontStyle: "italic",
               fontWeight: 300,
               fontSize: "clamp(20px, 3vw, 28px)",
-              color: "#F2EDE4",
+              color: "#060606",
               margin: 0,
             }}>Every Celebration, Told Like a Film</h3>
           </div>

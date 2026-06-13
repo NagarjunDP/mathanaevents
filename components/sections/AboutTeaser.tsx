@@ -14,9 +14,9 @@ export default function AboutTeaser() {
 
   return (
     <section className="about-teaser-section" style={{
-      background: "var(--obsidian)",
-      borderTop: "1px solid rgba(201,168,76,0.1)",
-      borderBottom: "1px solid rgba(201,168,76,0.1)",
+      background: "#F2EDE4",
+      borderTop: "1px solid rgba(6,6,6,0.05)",
+      borderBottom: "1px solid rgba(6,6,6,0.05)",
     }}>
       <div style={{
         maxWidth: "1200px",
@@ -32,7 +32,7 @@ export default function AboutTeaser() {
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(36px, 4vw, 56px)",
             fontWeight: 300,
-            color: "var(--cream)",
+            color: "#060606",
             lineHeight: 1.2,
             marginBottom: "32px",
           }}>
@@ -42,7 +42,7 @@ export default function AboutTeaser() {
             fontFamily: "'Inter', sans-serif",
             fontSize: "15px",
             fontWeight: 300,
-            color: "var(--cream-muted)",
+            color: "rgba(6, 6, 6, 0.75)",
             lineHeight: 1.8,
             marginBottom: "40px",
           }}>
@@ -94,8 +94,8 @@ export default function AboutTeaser() {
           }
         }
         .about-teaser-link:hover {
-          color: var(--cream) !important;
-          border-color: var(--cream) !important;
+          color: #060606 !important;
+          border-color: #060606 !important;
         }
       `}</style>
     </section>
