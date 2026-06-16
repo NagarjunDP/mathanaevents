@@ -5,12 +5,18 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 const bentoImages = [
-  { src: "/bento1wed.png", alt: "Mathana Events Cinematic Wedding", className: "bento-wide-top" },
-  { src: "/ben4.jpg", alt: "Mathana Events Portrait", className: "bento-tall" },
-  { src: "/ben1.jpg", alt: "Mathana Events Details", className: "bento-landscape-1" },
-  { src: "/ben3.jpg", alt: "Mathana Events Moments", className: "bento-square" },
-  { src: "/ben2.jpg", alt: "Mathana Events Candid", className: "bento-landscape-2" },
-  { src: "/bento2wed.png", alt: "Mathana Events Celebration", className: "bento-wide-bottom" },
+  { src: "/wedban1.png", alt: "Mathana Events Wedding Banner 1", className: "img-wedban1" },
+  { src: "/ben3.jpg", alt: "Mathana Events Moments", className: "img-ben3" },
+  { src: "/haldiban2.png", alt: "Mathana Events Haldiban 2", className: "img-haldiban2" },
+  { src: "/haldiban.png", alt: "Mathana Events Haldiban", className: "img-haldiban" },
+  { src: "/marrban2.png", alt: "Mathana Events Wedding Portrait 2", className: "img-marrban2" },
+  { src: "/ben1.jpg", alt: "Mathana Events Details", className: "img-ben1" },
+  { src: "/marrban1.png", alt: "Mathana Events Wedding Portrait 1", className: "img-marrban1" },
+  { src: "/ben2.jpg", alt: "Mathana Events Candid", className: "img-ben2" },
+  { src: "/marrban3.png", alt: "Mathana Events Wedding Portrait 3", className: "img-marrban3" },
+  { src: "/marrban4.png", alt: "Mathana Events Wedding Portrait 4", className: "img-marrban4" },
+  { src: "/ben4.jpg", alt: "Mathana Events Portrait", className: "img-ben4" },
+  { src: "/wedban2.png", alt: "Mathana Events Wedding Banner 2", className: "img-wedban2" },
 ];
 
 export default function CelebrationsGrid() {
@@ -37,23 +43,47 @@ export default function CelebrationsGrid() {
         }
       );
 
-      // Bento Grid reveal
-      gsap.fromTo(
-        ".bento-item",
-        { y: 60, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".bento-grid",
-            start: "top 75%",
-          },
+      // Bento Grid items reveal and parallax image animations
+      const items = gsap.utils.toArray<HTMLElement>(".bento-item");
+      items.forEach((item) => {
+        // Entrance animation for each card as it scrolls into view
+        gsap.fromTo(
+          item,
+          { y: 50, opacity: 0, scale: 0.95 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+
+        // Smooth scroll-driven vertical parallax for the image inside the card
+        const img = item.querySelector(".bento-img");
+        if (img) {
+          gsap.set(img, { scale: 1.15, transformOrigin: "center center" });
+          gsap.fromTo(
+            img,
+            { yPercent: -8 },
+            {
+              yPercent: 8,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
+              },
+            }
+          );
         }
-      );
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -124,16 +154,20 @@ export default function CelebrationsGrid() {
           border: 1px solid rgba(201,168,76,0.15);
           box-shadow: 0 10px 30px rgba(0,0,0,0.5);
           opacity: 0; /* Handled by GSAP */
-        }
-
-        .bento-img {
-          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+          will-change: transform;
         }
 
         @media (hover: hover) {
-          .bento-item:hover .bento-img {
-            transform: scale(1.05);
+          .bento-item:hover {
+            transform: translateY(-8px) scale(1.01) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            border-color: rgba(201,168,76,0.45);
           }
+        }
+
+        .bento-img {
+          will-change: transform;
         }
 
         .bento-overlay {
@@ -144,12 +178,18 @@ export default function CelebrationsGrid() {
         }
 
         /* Desktop Grid Placements */
-        .bento-wide-top { grid-column: 1 / 5; grid-row: 1 / 2; }
-        .bento-tall { grid-column: 1 / 2; grid-row: 2 / 4; }
-        .bento-landscape-1 { grid-column: 2 / 4; grid-row: 2 / 3; }
-        .bento-square { grid-column: 4 / 5; grid-row: 2 / 3; }
-        .bento-landscape-2 { grid-column: 2 / 5; grid-row: 3 / 4; }
-        .bento-wide-bottom { grid-column: 1 / 5; grid-row: 4 / 5; }
+        .img-wedban1 { grid-column: 1 / 4; grid-row: 1 / 2; }
+        .img-ben3 { grid-column: 4 / 5; grid-row: 1 / 2; }
+        .img-haldiban2 { grid-column: 1 / 2; grid-row: 2 / 4; }
+        .img-haldiban { grid-column: 2 / 3; grid-row: 2 / 3; }
+        .img-marrban2 { grid-column: 3 / 5; grid-row: 2 / 3; }
+        .img-ben1 { grid-column: 2 / 4; grid-row: 3 / 4; }
+        .img-marrban1 { grid-column: 4 / 5; grid-row: 3 / 5; }
+        .img-ben2 { grid-column: 1 / 3; grid-row: 4 / 5; }
+        .img-marrban3 { grid-column: 3 / 4; grid-row: 4 / 6; }
+        .img-marrban4 { grid-column: 1 / 3; grid-row: 5 / 6; }
+        .img-ben4 { grid-column: 4 / 5; grid-row: 5 / 7; }
+        .img-wedban2 { grid-column: 1 / 4; grid-row: 6 / 7; }
 
         /* Tablet Grid Placements */
         @media (max-width: 1024px) {
@@ -168,12 +208,18 @@ export default function CelebrationsGrid() {
             grid-auto-rows: 160px;
             gap: 12px;
           }
-          .bento-wide-top { grid-column: 1 / 3; grid-row: 1 / 2; }
-          .bento-tall { grid-column: 1 / 2; grid-row: 2 / 4; }
-          .bento-square { grid-column: 2 / 3; grid-row: 2 / 3; }
-          .bento-landscape-1 { grid-column: 2 / 3; grid-row: 3 / 4; }
-          .bento-landscape-2 { grid-column: 1 / 3; grid-row: 4 / 5; }
-          .bento-wide-bottom { grid-column: 1 / 3; grid-row: 5 / 6; }
+          .img-wedban1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+          .img-haldiban2 { grid-column: 1 / 2; grid-row: 2 / 4; }
+          .img-marrban1 { grid-column: 2 / 3; grid-row: 2 / 4; }
+          .img-ben3 { grid-column: 1 / 2; grid-row: 4 / 5; }
+          .img-haldiban { grid-column: 2 / 3; grid-row: 4 / 5; }
+          .img-marrban2 { grid-column: 1 / 3; grid-row: 5 / 6; }
+          .img-ben1 { grid-column: 1 / 3; grid-row: 6 / 7; }
+          .img-marrban3 { grid-column: 1 / 2; grid-row: 7 / 9; }
+          .img-ben4 { grid-column: 2 / 3; grid-row: 7 / 9; }
+          .img-ben2 { grid-column: 1 / 3; grid-row: 9 / 10; }
+          .img-marrban4 { grid-column: 1 / 3; grid-row: 10 / 11; }
+          .img-wedban2 { grid-column: 1 / 3; grid-row: 11 / 12; }
         }
         
         @media (max-width: 480px) {
