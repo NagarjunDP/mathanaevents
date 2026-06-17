@@ -7,7 +7,6 @@ export default function AtelierPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Parallax hero bg
     const heroBg = document.querySelector(".atelier-hero-bg");
     const handleScroll = () => {
       if (heroBg) {
@@ -16,7 +15,6 @@ export default function AtelierPage() {
     };
     window.addEventListener("scroll", handleScroll);
 
-    // Fade up sections
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".fade-up-block",
@@ -61,7 +59,7 @@ export default function AtelierPage() {
           style={{
             position: "absolute",
             inset: -50,
-            backgroundImage: "url('/jb.jpg')", // Founder image
+            backgroundImage: "url('/jb.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center 20%",
             zIndex: 0,
@@ -76,19 +74,19 @@ export default function AtelierPage() {
           }}
         />
         <div style={{ position: "relative", zIndex: 2, padding: "0 24px" }}>
-          <p className="section-label" style={{ marginBottom: "24px" }}>THE FILMMAKER BEHIND THE LENS</p>
+          <p className="section-label" style={{ marginBottom: "24px" }}>THE FILMMAKERS BEHIND THE LENS</p>
           <h1
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: "italic",
               fontWeight: 300,
-              fontSize: "clamp(64px, 8vw, 120px)",
+              fontSize: "clamp(48px, 8vw, 120px)",
               color: "#ffffff",
               lineHeight: 1,
               marginBottom: "16px",
             }}
           >
-            Jagadish Gowda
+            Mathana Events
           </h1>
           <p
             style={{
@@ -100,13 +98,19 @@ export default function AtelierPage() {
               textTransform: "uppercase",
             }}
           >
-            Cinematographer &middot; Director &middot; Storyteller
+            Cinema &middot; Light &middot; Story
           </p>
         </div>
       </section>
 
       {/* ── STORY SECTION ── */}
       <section className="atelier-story" style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
+
+        {/* ── FOUNDER LABEL ── */}
+        <div className="fade-up-block" style={{ textAlign: "center", marginBottom: "64px" }}>
+          <p className="section-label" style={{ fontSize: "11px", letterSpacing: "0.3em" }}>FOUNDER</p>
+          <div style={{ width: "40px", height: "1px", background: "rgba(201,168,76,0.4)", margin: "16px auto 0" }} />
+        </div>
 
         {/* Block 1: From Films to Weddings */}
         <div className="fade-up-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center", marginBottom: "160px" }}>
@@ -143,7 +147,7 @@ export default function AtelierPage() {
           <div style={{
             position: "relative",
             width: "100%",
-            paddingBottom: "56.25%", // 16:9 aspect ratio
+            paddingBottom: "56.25%",
             height: 0,
             overflow: "hidden",
             boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
@@ -216,6 +220,85 @@ export default function AtelierPage() {
           </div>
         </div>
 
+        {/* ── DIVIDER ── */}
+        <div className="fade-up-block" style={{ display: "flex", alignItems: "center", gap: "24px", marginBottom: "80px" }}>
+          <div style={{ flex: 1, height: "1px", background: "rgba(201,168,76,0.15)" }} />
+          <p style={{ fontFamily: "'Raleway', sans-serif", fontSize: "11px", letterSpacing: "0.3em", color: "var(--gold)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Co-Founder</p>
+          <div style={{ flex: 1, height: "1px", background: "rgba(201,168,76,0.15)" }} />
+        </div>
+
+        {/* ── CO-FOUNDER: Rahul / Bob RJ ── */}
+        <div className="fade-up-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center", marginBottom: "120px" }}>
+          <div>
+            <p className="section-label" style={{ marginBottom: "24px" }}>Five Years in the Frame</p>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: "italic",
+              fontSize: "clamp(36px, 4vw, 48px)",
+              color: "var(--cream)",
+              lineHeight: 1.1,
+              marginBottom: "8px",
+            }}>
+              Rahul
+            </h2>
+            <p style={{
+              fontFamily: "'Raleway', sans-serif",
+              fontWeight: 200,
+              fontSize: "12px",
+              letterSpacing: "0.25em",
+              color: "var(--gold)",
+              textTransform: "uppercase",
+              marginBottom: "32px",
+            }}>
+              Known as Bob RJ
+            </p>
+            <p style={{
+              fontFamily: "'Raleway', sans-serif",
+              fontWeight: 300,
+              fontSize: "16px",
+              lineHeight: 1.8,
+              color: "var(--cream-dim)",
+              marginBottom: "32px",
+            }}>
+              With 5 years of hands-on experience across web series, short films, music covers, and cinematic wedding films, Rahul brings precision and versatility to every frame. His command of advanced lighting design, camera composition, and post-production — spanning Adobe Premiere Pro, Lightroom, and Blender VFX — ensures every project is crafted from concept to final cut with cinematic consistency.
+            </p>
+          </div>
+          <div style={{ position: "relative", aspectRatio: "3/4", width: "100%", borderRadius: "4px", overflow: "hidden", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}>
+            <Image src="/IMG_20250129_212530_623.webp" alt="Rahul (Bob RJ) - Co-Founder of Mathana Events" fill style={{ objectFit: "cover", objectPosition: "center top" }} sizes="(max-width: 768px) 100vw, 50vw" />
+          </div>
+        </div>
+
+        {/* Co-Founder Competencies */}
+        <div className="fade-up-block" style={{
+          background: "var(--charcoal)",
+          border: "1px solid rgba(201,168,76,0.3)",
+          padding: "64px",
+          textAlign: "center",
+          marginBottom: "120px"
+        }}>
+          <p className="section-label" style={{ marginBottom: "40px" }}>Craft & Toolkit</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", textAlign: "left" }}>
+            <div>
+              <p style={{ fontFamily: "'Raleway'", fontSize: "11px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "20px" }}>Expertise</p>
+              {["Advanced lighting design", "Camera angles & composition", "Cinematic wedding films", "Web series & short films", "Music cover productions"].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+                  <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
+                  <p style={{ fontFamily: "'Raleway'", fontWeight: 300, fontSize: "14px", color: "var(--cream-dim)", margin: 0 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+            <div>
+              <p style={{ fontFamily: "'Raleway'", fontSize: "11px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "20px" }}>Software</p>
+              {["Adobe Premiere Pro", "Adobe Lightroom", "Blender VFX"].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+                  <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
+                  <p style={{ fontFamily: "'Raleway'", fontWeight: 300, fontSize: "14px", color: "var(--cream-dim)", margin: 0 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {/* ── JOIN OUR TEAM ── */}
@@ -241,7 +324,7 @@ export default function AtelierPage() {
           }}>
             We are always looking for passionate, cinematic storytellers to join Mathana Events. If you have an eye for emotion and a love for the craft, we would love to see your portfolio.
           </p>
-          <a
+          
             href="mailto:careers@mathanaevents.com"
             className="inline-block px-8 py-4 border border-[var(--gold)] text-[var(--gold)] font-sans text-[12px] tracking-[0.2em] uppercase no-underline transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--black)]"
           >
@@ -253,7 +336,7 @@ export default function AtelierPage() {
       {/* ── PRESS / MEDIA ── */}
       <section style={{ padding: "0 48px 120px", textAlign: "center" }}>
         <p className="section-label" style={{ marginBottom: "24px" }}>As Seen In</p>
-        <a
+        
           href="#"
           className="press-link"
           style={{
@@ -292,6 +375,9 @@ export default function AtelierPage() {
           .careers-card {
             padding: 48px 24px !important;
           }
+          .cofounder-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
         
         .careers-card {
@@ -300,4 +386,4 @@ export default function AtelierPage() {
       `}</style>
     </div>
   );
-}
+      }
