@@ -325,10 +325,30 @@ export default function AtelierPage() {
             We are always looking for passionate, cinematic storytellers to join Mathana Events. If you have an eye for emotion and a love for the craft, we would love to see your portfolio.
           </p>
           
-            href="mailto:careers@mathanaevents.com"
-            className="inline-block px-8 py-4 border border-[var(--gold)] text-[var(--gold)] font-sans text-[12px] tracking-[0.2em] uppercase no-underline transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--black)]"
-          >
-            Send Your Resume
+            href="mailto:mathanaevents@gmail.com"
+  style={{
+    display: "inline-block",
+    padding: "16px 32px",
+    border: "1px solid var(--gold)",
+    color: "var(--gold)",
+    fontFamily: "'Raleway', sans-serif",
+    fontSize: "12px",
+    letterSpacing: "0.2em",
+    textTransform: "uppercase" as const,
+    textDecoration: "none",
+    transition: "all 0.3s ease",
+  }}
+  onMouseEnter={e => {
+    (e.target as HTMLAnchorElement).style.background = "var(--gold)";
+    (e.target as HTMLAnchorElement).style.color = "var(--black)";
+  }}
+  onMouseLeave={e => {
+    (e.target as HTMLAnchorElement).style.background = "transparent";
+    (e.target as HTMLAnchorElement).style.color = "var(--gold)";
+  }}
+>
+  Send Your Resume
+</a>
           </a>
         </div>
       </section>
