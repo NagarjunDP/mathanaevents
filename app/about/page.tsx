@@ -23,11 +23,11 @@ export default function AtelierPage() {
           y: 0,
           opacity: 1,
           duration: 1,
-          stagger: 0.2,
+          stagger: 0,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".atelier-story",
-            start: "top 75%",
+            trigger: ".fade-up-block",
+            start: "top 85%",
           },
         }
       );
@@ -41,6 +41,7 @@ export default function AtelierPage() {
 
   return (
     <div ref={containerRef} style={{ background: "var(--black)", minHeight: "100vh" }}>
+
       {/* ── HERO ── */}
       <section
         style={{
@@ -136,7 +137,12 @@ export default function AtelierPage() {
               lineHeight: 1.8,
               color: "var(--cream-dim)",
             }}>
-              With over 8 years of experience as a working film cinematographer in the Kannada film industry, including credits like <em>Maarige Daari</em>, <em>Ninna Gungalli</em>, and numerous album songs, my approach to capturing moments is fundamentally different. Embarking on the <strong>Mathana Events</strong> journey, I decided to blend the grandeur of cinema with the intimacy of real life. I don't just capture events; I direct light, frame emotion, and craft a cinematic narrative that elevates your love story to the silver screen.
+              With over 8 years of experience as a working film cinematographer in the Kannada film industry,
+              including credits like <em>Maarige Daari</em>, <em>Ninna Gungalli</em>, and numerous album songs,
+              my approach to capturing moments is fundamentally different. Embarking on the{" "}
+              <strong>Mathana Events</strong> journey, I decided to blend the grandeur of cinema with the
+              intimacy of real life. I don&apos;t just capture events; I direct light, frame emotion, and craft
+              a cinematic narrative that elevates your love story to the silver screen.
             </p>
           </div>
         </div>
@@ -152,7 +158,7 @@ export default function AtelierPage() {
             overflow: "hidden",
             boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
             border: "1px solid rgba(201,168,76,0.3)",
-            borderRadius: "4px"
+            borderRadius: "4px",
           }}>
             <iframe
               style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
@@ -162,7 +168,7 @@ export default function AtelierPage() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
-            ></iframe>
+            />
           </div>
         </div>
 
@@ -188,7 +194,10 @@ export default function AtelierPage() {
               lineHeight: 1.8,
               color: "var(--cream-dim)",
             }}>
-              A premium wedding film requires more than just high-end cameras. It requires an eye for the unseen moments—the slight touch of hands, the unspoken tears, the grandeur of the venue. We bring film-set discipline, cinema-grade lighting techniques, and a storytelling structure to the most important day of your life.
+              A premium wedding film requires more than just high-end cameras. It requires an eye for the
+              unseen moments—the slight touch of hands, the unspoken tears, the grandeur of the venue. We
+              bring film-set discipline, cinema-grade lighting techniques, and a storytelling structure to
+              the most important day of your life.
             </p>
           </div>
         </div>
@@ -199,7 +208,7 @@ export default function AtelierPage() {
           border: "1px solid rgba(201,168,76,0.3)",
           padding: "64px",
           textAlign: "center",
-          marginBottom: "120px"
+          marginBottom: "120px",
         }}>
           <p className="section-label" style={{ marginBottom: "40px" }}>Selected Filmography</p>
           <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -215,15 +224,15 @@ export default function AtelierPage() {
             <div style={{ width: "40px", height: "1px", background: "rgba(201,168,76,0.2)", margin: "0 auto" }} />
             <div>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "32px", color: "var(--cream)", marginBottom: "4px" }}>Mathana Events</p>
-              <p style={{ fontFamily: "'Raleway'", fontSize: "12px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Founder & Lead Filmmaker &middot; 100+ Weddings</p>
+              <p style={{ fontFamily: "'Raleway'", fontSize: "12px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Founder &amp; Lead Filmmaker &middot; 100+ Weddings</p>
             </div>
           </div>
         </div>
 
-        {/* ── DIVIDER ── */}
+        {/* ── CO-FOUNDER DIVIDER ── */}
         <div className="fade-up-block" style={{ display: "flex", alignItems: "center", gap: "24px", marginBottom: "80px" }}>
           <div style={{ flex: 1, height: "1px", background: "rgba(201,168,76,0.15)" }} />
-          <p style={{ fontFamily: "'Raleway', sans-serif", fontSize: "11px", letterSpacing: "0.3em", color: "var(--gold)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Co-Founder</p>
+          <p style={{ fontFamily: "'Raleway', sans-serif", fontSize: "11px", letterSpacing: "0.3em", color: "var(--gold)", textTransform: "uppercase", whiteSpace: "nowrap", margin: 0 }}>Co-Founder</p>
           <div style={{ flex: 1, height: "1px", background: "rgba(201,168,76,0.15)" }} />
         </div>
 
@@ -260,11 +269,21 @@ export default function AtelierPage() {
               color: "var(--cream-dim)",
               marginBottom: "32px",
             }}>
-              With 5 years of hands-on experience across web series, short films, music covers, and cinematic wedding films, Rahul brings precision and versatility to every frame. His command of advanced lighting design, camera composition, and post-production — spanning Adobe Premiere Pro, Lightroom, and Blender VFX — ensures every project is crafted from concept to final cut with cinematic consistency.
+              With 5 years of hands-on experience across web series, short films, music covers, and cinematic
+              wedding films, Rahul brings precision and versatility to every frame. His command of advanced
+              lighting design, camera composition, and post-production — spanning Adobe Premiere Pro,
+              Lightroom, and Blender VFX — ensures every project is crafted from concept to final cut with
+              cinematic consistency.
             </p>
           </div>
           <div style={{ position: "relative", aspectRatio: "3/4", width: "100%", borderRadius: "4px", overflow: "hidden", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}>
-            <Image src="/IMG_20250129_212530_623.webp" alt="Rahul (Bob RJ) - Co-Founder of Mathana Events" fill style={{ objectFit: "cover", objectPosition: "center top" }} sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image
+              src="/IMG_20250129_212530_623.webp"
+              alt="Rahul (Bob RJ) - Co-Founder of Mathana Events"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </div>
 
@@ -274,10 +293,10 @@ export default function AtelierPage() {
           border: "1px solid rgba(201,168,76,0.3)",
           padding: "64px",
           textAlign: "center",
-          marginBottom: "120px"
+          marginBottom: "120px",
         }}>
-          <p className="section-label" style={{ marginBottom: "40px" }}>Craft & Toolkit</p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", textAlign: "left" }}>
+          <p className="section-label" style={{ marginBottom: "40px" }}>Craft &amp; Toolkit</p>
+          <div className="toolkit-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", textAlign: "left" }}>
             <div>
               <p style={{ fontFamily: "'Raleway'", fontSize: "11px", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "20px" }}>Expertise</p>
               {["Advanced lighting design", "Camera angles & composition", "Cinematic wedding films", "Web series & short films", "Music cover productions"].map((item, i) => (
@@ -322,33 +341,33 @@ export default function AtelierPage() {
             lineHeight: 1.8,
             marginBottom: "40px",
           }}>
-            We are always looking for passionate, cinematic storytellers to join Mathana Events. If you have an eye for emotion and a love for the craft, we would love to see your portfolio.
+            We are always looking for passionate, cinematic storytellers to join Mathana Events. If you have
+            an eye for emotion and a love for the craft, we would love to see your portfolio.
           </p>
-          
+          <a
             href="mailto:mathanaevents@gmail.com"
-  style={{
-    display: "inline-block",
-    padding: "16px 32px",
-    border: "1px solid var(--gold)",
-    color: "var(--gold)",
-    fontFamily: "'Raleway', sans-serif",
-    fontSize: "12px",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase" as const,
-    textDecoration: "none",
-    transition: "all 0.3s ease",
-  }}
-  onMouseEnter={e => {
-    (e.target as HTMLAnchorElement).style.background = "var(--gold)";
-    (e.target as HTMLAnchorElement).style.color = "var(--black)";
-  }}
-  onMouseLeave={e => {
-    (e.target as HTMLAnchorElement).style.background = "transparent";
-    (e.target as HTMLAnchorElement).style.color = "var(--gold)";
-  }}
->
-  Send Your Resume
-</a>
+            style={{
+              display: "inline-block",
+              padding: "16px 32px",
+              border: "1px solid var(--gold)",
+              color: "var(--gold)",
+              fontFamily: "'Raleway', sans-serif",
+              fontSize: "12px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase" as const,
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold)";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--black)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)";
+            }}
+          >
+            Send Your Resume
           </a>
         </div>
       </section>
@@ -356,7 +375,7 @@ export default function AtelierPage() {
       {/* ── PRESS / MEDIA ── */}
       <section style={{ padding: "0 48px 120px", textAlign: "center" }}>
         <p className="section-label" style={{ marginBottom: "24px" }}>As Seen In</p>
-        
+        <a
           href="#"
           className="press-link"
           style={{
@@ -367,7 +386,7 @@ export default function AtelierPage() {
             textDecoration: "none",
             textShadow: "0 0 20px rgba(201,168,76,0.6)",
             transition: "all 0.4s ease",
-            display: "inline-block"
+            display: "inline-block",
           }}
         >
           The Hindu
@@ -395,15 +414,15 @@ export default function AtelierPage() {
           .careers-card {
             padding: 48px 24px !important;
           }
-          .cofounder-grid {
+          .toolkit-grid {
             grid-template-columns: 1fr !important;
+            text-align: center !important;
           }
         }
-        
         .careers-card {
           padding: 80px;
         }
       `}</style>
     </div>
   );
-      }
+                         }
