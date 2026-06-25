@@ -24,12 +24,12 @@ export default function Preloader() {
         clearTimeout(completeTimer);
       };
     } else {
-      localStorage.setItem("preloader_shown", "true");
       const exitTimer = setTimeout(() => {
         setExit(true);
       }, 3200);
       const completeTimer = setTimeout(() => {
         setComplete(true);
+        localStorage.setItem("preloader_shown", "true");
       }, 3800);
       return () => {
         clearTimeout(exitTimer);

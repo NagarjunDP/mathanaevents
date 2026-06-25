@@ -16,8 +16,10 @@ export default function HeroSection() {
   const decorRef = useRef<HTMLDivElement>(null);
   const dotsRef = useRef<HTMLDivElement[]>([]);
 
-  // Apply magnetic effect to the main headings
-  useTextMagnet(".magnetic-text");
+  const [magnetEnabled, setMagnetEnabled] = useState(false);
+
+  // Apply magnetic effect to the main headings (only after entrance animation finishes to prevent interruption)
+  useTextMagnet(".magnetic-text", magnetEnabled);
 
   // Load video source and check preloader visits
   useEffect(() => {
@@ -104,10 +106,14 @@ export default function HeroSection() {
         gsap.set(".hero-location-tag, .hero-location-line, .char-split, .hero-descriptor, .hero-cta-group", { opacity: 1, y: 0, width: "100%", scaleX: 1 });
         // Restore location lines
         gsap.set(".hero-location-line", { width: window.innerWidth <= 768 ? 20 : 40 });
+        setMagnetEnabled(true);
         return;
       }
 
-      const tl = gsap.timeline({ delay });
+      const tl = gsap.timeline({ 
+        delay,
+        onComplete: () => setMagnetEnabled(true)
+      });
 
       // 0ms — location tag lines draw outward + text fades in
       tl.from(".hero-location-tag", { opacity: 0, duration: 0.8, ease: "power2.out" }, 0)
