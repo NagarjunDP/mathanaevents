@@ -29,7 +29,7 @@ export default function HeroSection() {
     setVimeoId(randomVideo);
 
     // Randomize background image
-    const heroBgImages = ["/pic5.jpeg", "/pic2.jpeg", "/pic1.jpeg", "/p1.jpeg", "/pic8.jpeg", "/pic9.jpeg"];
+    const heroBgImages = ["/1 (5).JPG.jpeg", "/pic5.jpeg", "/pic2.jpeg", "/pic1.jpeg", "/p1.jpeg", "/pic8.jpeg", "/pic9.jpeg"];
     const randomImg = heroBgImages[Math.floor(Math.random() * heroBgImages.length)];
     setBgImage(randomImg);
 
@@ -121,7 +121,7 @@ export default function HeroSection() {
         // 880ms  — CTA buttons slide up + fade in
         .from(".hero-cta-group", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.88);
     }, heroRef);
-    
+
     return () => ctx.revert();
   }, []);
 
@@ -131,7 +131,7 @@ export default function HeroSection() {
 
     const heroSection = heroRef.current;
     const heroMedia = document.querySelector('.hero-video-iframe') as HTMLElement;
-    
+
     if (!heroSection || !heroMedia) return;
 
     let ticking = false;
@@ -144,7 +144,7 @@ export default function HeroSection() {
     const updateParallax = () => {
       const scrollY = window.scrollY;
       const heroHeight = heroSection.offsetHeight;
-      
+
       if (scrollY < heroHeight * 1.5) {
         const parallaxOffset = scrollY * 0.4;
         heroMedia.style.transform = `translate(-50%, calc(-50% + ${parallaxOffset}px)) scale(1.15)`;
@@ -294,15 +294,15 @@ export default function HeroSection() {
         <h1 className="magnetic-text hero-h1">
           <div className="hero-h1-line hero-line-a">
             {lineAText.split("").map((c, i) => (
-              c === " " 
-                ? <span key={`a-${i}`} className="char-space"> </span> 
+              c === " "
+                ? <span key={`a-${i}`} className="char-space"> </span>
                 : <span key={`a-${i}`} className="char-split">{c}</span>
             ))}
           </div>
           <div className="hero-h1-line hero-line-b">
             {lineBText.split("").map((c, i) => (
-              c === " " 
-                ? <span key={`b-${i}`} className="char-space"> </span> 
+              c === " "
+                ? <span key={`b-${i}`} className="char-space"> </span>
                 : <span key={`b-${i}`} className="char-split">{c}</span>
             ))}
           </div>

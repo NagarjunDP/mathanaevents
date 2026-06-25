@@ -5,12 +5,37 @@ import Image from "next/image";
 
 const categories = ["ALL", "WEDDING", "CANDID", "PRE-WEDDING", "EVENTS"];
 
-// Client's 19 Portrait Photos
-const allPhotos = Array.from({ length: 19 }, (_, i) => ({
-  id: String(i + 1),
-  src: `/pic${i + 1}.jpeg`,
-  type: categories[(i % 4) + 1], // distribute across categories
-}));
+// All Photos with exact dimensions for responsive rendering and CLS prevention
+const allPhotos = [
+  { id: "1", src: "/pic1.jpeg", type: "WEDDING", width: 2984, height: 4480 },
+  { id: "2", src: "/pic2.jpeg", type: "CANDID", width: 3072, height: 4608 },
+  { id: "3", src: "/pic3.jpeg", type: "PRE-WEDDING", width: 3072, height: 4608 },
+  { id: "4", src: "/pic4.jpeg", type: "EVENTS", width: 4672, height: 7008 },
+  { id: "5", src: "/pic5.jpeg", type: "WEDDING", width: 4672, height: 7008 },
+  { id: "6", src: "/pic6.jpeg", type: "CANDID", width: 4672, height: 7008 },
+  { id: "7", src: "/pic7.jpeg", type: "PRE-WEDDING", width: 4672, height: 7008 },
+  { id: "8", src: "/pic8.jpeg", type: "EVENTS", width: 4672, height: 7008 },
+  { id: "9", src: "/pic9.jpeg", type: "WEDDING", width: 4672, height: 7008 },
+  { id: "10", src: "/pic10.jpeg", type: "CANDID", width: 4672, height: 7008 },
+  { id: "11", src: "/pic11.jpeg", type: "PRE-WEDDING", width: 7008, height: 4672 },
+  { id: "12", src: "/pic12.jpeg", type: "EVENTS", width: 4672, height: 7008 },
+  { id: "13", src: "/pic13.jpeg", type: "WEDDING", width: 4082, height: 6123 },
+  { id: "14", src: "/pic14.jpeg", type: "CANDID", width: 4082, height: 6123 },
+  { id: "15", src: "/pic15.jpeg", type: "PRE-WEDDING", width: 3265, height: 4898 },
+  { id: "16", src: "/pic16.jpeg", type: "EVENTS", width: 4082, height: 6123 },
+  { id: "17", src: "/pic17.jpeg", type: "WEDDING", width: 2667, height: 4000 },
+  { id: "18", src: "/pic18.jpeg", type: "CANDID", width: 3766, height: 5658 },
+  { id: "19", src: "/pic19.jpeg", type: "PRE-WEDDING", width: 2666, height: 3999 },
+  // Pre-wedding photos added by user (optimized and lazy loaded)
+  { id: "20", src: "/1 (5).JPG.jpeg", type: "PRE-WEDDING", width: 10854, height: 6105 },
+  { id: "21", src: "/1 (23).jpg.jpeg", type: "PRE-WEDDING", width: 4024, height: 6048 },
+  { id: "22", src: "/1 (24).jpg.jpeg", type: "PRE-WEDDING", width: 4672, height: 7008 },
+  { id: "23", src: "/1 (25).jpg.jpeg", type: "PRE-WEDDING", width: 7008, height: 4672 },
+  { id: "24", src: "/1 (33).JPG.jpeg", type: "PRE-WEDDING", width: 4672, height: 7008 },
+  { id: "25", src: "/1 (34).JPG.jpeg", type: "PRE-WEDDING", width: 4672, height: 7008 },
+  { id: "26", src: "/1 (36).JPG.jpeg", type: "PRE-WEDDING", width: 4672, height: 7008 },
+  { id: "27", src: "/1 (54).JPG.jpeg", type: "PRE-WEDDING", width: 3823, height: 5734 },
+];
 
 export default function PhotographyPage() {
   const [activeTab, setActiveTab] = useState("ALL");
@@ -63,11 +88,14 @@ export default function PhotographyPage() {
         
         {/* Background Parallax Image */}
         <div style={{ position: "absolute", inset: "-10%", zIndex: 0 }}>
-          <img 
-            ref={heroImgRef}
+          <Image 
+            ref={heroImgRef as any}
             src="/pic11.jpeg" 
             alt="Mathana Events Premium Photography" 
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
+            fill
+            priority
+            sizes="120vw"
+            style={{ objectFit: "cover", objectPosition: "center 30%" }}
           />
         </div>
 
@@ -137,11 +165,14 @@ export default function PhotographyPage() {
               onClick={() => setLightboxIndex(i)}
             >
               <div className="photo-wrapper">
-                <img 
+                <Image 
                   src={photo.src} 
                   alt={`Photography ${i}`} 
-                  className="photo-img" 
-                  loading="lazy"
+                  width={photo.width}
+                  height={photo.height}
+                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="photo-img"
+                  style={{ width: "100%", height: "auto" }}
                 />
                 <div className="photo-overlay" />
               </div>
@@ -179,6 +210,7 @@ export default function PhotographyPage() {
               src={filteredPhotos[lightboxIndex].src} 
               alt="Lightbox View" 
               fill 
+              sizes="90vw"
               style={{ objectFit: "contain" }} 
               priority
             />

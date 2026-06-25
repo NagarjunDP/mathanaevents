@@ -59,7 +59,7 @@ export default function Preloader() {
     });
   }, []);
 
-  if (!mounted || complete) return null;
+  if (complete) return null;
 
   const brandName = "MATHANA EVENTS".split("");
 
@@ -69,72 +69,76 @@ export default function Preloader() {
         isAbbreviated ? "abbreviated-visit" : "full-visit"
       }`}
     >
-      {/* PHASE 1: Center-out horizontal line */}
-      {!isAbbreviated && <div className="preloader-line" />}
+      {mounted && (
+        <>
+          {/* PHASE 1: Center-out horizontal line */}
+          {!isAbbreviated && <div className="preloader-line" />}
 
-      {/* Main Preloader Content */}
-      <div className={`preloader-content ${exit ? "exit" : ""}`}>
-        {/* Particle Scatter (PHASE 5) */}
-        {!isAbbreviated && (
-          <div className="particles-wrapper">
-            {particles.map((p, idx) => (
-              <div
-                key={p.id}
-                className="particle"
-                style={
-                  {
-                    "--dx-desktop": `${p.dxDesktop}px`,
-                    "--dy-desktop": `${p.dyDesktop}px`,
-                    "--dx-mobile": `${p.dxMobile}px`,
-                    "--dy-mobile": `${p.dyMobile}px`,
-                    animationDelay: `${2400 + idx * 30}ms, ${2400 + idx * 30 + 600}ms`,
-                  } as React.CSSProperties
-                }
-              />
-            ))}
+          {/* Main Preloader Content */}
+          <div className={`preloader-content ${exit ? "exit" : ""}`}>
+            {/* Particle Scatter (PHASE 5) */}
+            {!isAbbreviated && (
+              <div className="particles-wrapper">
+                {particles.map((p, idx) => (
+                  <div
+                    key={p.id}
+                    className="particle"
+                    style={
+                      {
+                        "--dx-desktop": `${p.dxDesktop}px`,
+                        "--dy-desktop": `${p.dyDesktop}px`,
+                        "--dx-mobile": `${p.dxMobile}px`,
+                        "--dy-mobile": `${p.dyMobile}px`,
+                        animationDelay: `${2400 + idx * 30}ms, ${2400 + idx * 30 + 600}ms`,
+                      } as React.CSSProperties
+                    }
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Logo (PHASE 2) */}
+            <div className="preloader-logo">
+              <div className="preloader-logo-wrapper">
+                <Image
+                  src="/logoooo.png"
+                  alt="Mathana Events Logo"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Brand Name (PHASE 3) */}
+            <div className="brand-name-wrapper preloader-name">
+              {brandName.map((char, i) => (
+                <span
+                  key={i}
+                  className="letter"
+                  style={{
+                    animationDelay: isAbbreviated
+                      ? `${100 + i * 30}ms`
+                      : `${1000 + i * 55}ms`,
+                    marginRight: char === " " ? "0.4em" : "0",
+                  }}
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
+
+            {/* Tagline & Small Line (PHASE 4) */}
+            {!isAbbreviated && (
+              <>
+                <div className="tagline-line" />
+                <div className="tagline-text">PREMIUM WEDDING COMPANY</div>
+              </>
+            )}
           </div>
-        )}
-
-        {/* Logo (PHASE 2) */}
-        <div className="preloader-logo">
-          <div className="preloader-logo-wrapper">
-            <Image
-              src="/logoooo.png"
-              alt="Mathana Events Logo"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: "contain" }}
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Brand Name (PHASE 3) */}
-        <div className="brand-name-wrapper preloader-name">
-          {brandName.map((char, i) => (
-            <span
-              key={i}
-              className="letter"
-              style={{
-                animationDelay: isAbbreviated
-                  ? `${100 + i * 30}ms`
-                  : `${1000 + i * 55}ms`,
-                marginRight: char === " " ? "0.4em" : "0",
-              }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-
-        {/* Tagline & Small Line (PHASE 4) */}
-        {!isAbbreviated && (
-          <>
-            <div className="tagline-line" />
-            <div className="tagline-text">PREMIUM WEDDING COMPANY</div>
-          </>
-        )}
-      </div>
+        </>
+      )}
 
       <style jsx>{`
         .preloader-container {
